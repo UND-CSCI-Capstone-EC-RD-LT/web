@@ -69,4 +69,4 @@ app.directive('localView', function(localStorageService, $rootScope) {
 	};
 });
 
-var SERVER_URL = "http://54.174.7.166/v1/";
+var SERVER_URL = "http://54.243.4.179/v1/";
