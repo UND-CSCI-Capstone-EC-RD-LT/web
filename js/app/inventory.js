@@ -67,9 +67,10 @@ app.factory('InventoryService', function($http, localStorageService) {
 		 * @arg item The item to be removed from the database
 		 */
 		removeInventory: function(item) {
+			console.log(id);
 			var req = {
           method: 'DELETE',
-          url: SERVER_URL+'items/'+item,
+          url: SERVER_URL+'items/'+item.id,
           headers: {
               'Content-Type': "application/json",
               'Authorization': "JWT " + localStorageService.get("token")
@@ -218,7 +219,7 @@ app.controller('Inventory', function($rootScope, $scope, $mdDialog, $mdToast, $t
 		
 		// display a confirmation dialog
 		var confirm = $mdDialog.confirm()
-			.title("Are you sure you'd like to remove item " + item.item_id + "?")
+			.title("Are you sure you'd like to remove item " + item.barcode + "?")
 			.ariaLabel("Really remove item?")
 			.ok('Yes')
 			.cancel('No');
