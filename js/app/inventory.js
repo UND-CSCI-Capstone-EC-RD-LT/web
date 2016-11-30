@@ -67,10 +67,19 @@ app.factory('InventoryService', function($http, localStorageService) {
 		 * @arg item The item to be removed from the database
 		 */
 		removeInventory: function(item) {
-			return $http.post('../inventory-api/remove_item.php', item)
-				.then(function(res) {
-					return res.data;
-				})
+			var req = {
+          method: 'DELETE',
+          url: SERVER_URL+'items/'+item,
+          headers: {
+              'Content-Type': "application/json",
+              'Authorization': "JWT " + localStorageService.get("token")
+          }
+      }
+
+			return $http(req).then(function(res) {
+				console.log(res.data.data);
+				return res.data.data;
+			})
 		}
 		
 	}
