@@ -66,7 +66,6 @@ app.factory('InventoryService', function($http, localStorageService) {
 		 * @arg item The item to be removed from the database
 		 */
 		removeInventory: function(item) {
-			console.log(id);
 			var req = {
           method: 'DELETE',
           url: SERVER_URL+'items/'+item.id,
