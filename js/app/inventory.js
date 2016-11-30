@@ -23,7 +23,6 @@ app.factory('InventoryService', function($http, localStorageService) {
       }
 
 			return $http(req).then(function(res) {
-				console.log(res.data.data);
 				return res.data.data;
 			})
 		},
@@ -216,7 +215,7 @@ app.controller('Inventory', function($rootScope, $scope, $mdDialog, $mdToast, $t
 	 * @arg item The item to be removed
 	 */
 	$scope.removeInventory = function(item) {
-		
+		console.log(item);
 		// display a confirmation dialog
 		var confirm = $mdDialog.confirm()
 			.title("Are you sure you'd like to remove item " + item.barcode + "?")
@@ -234,7 +233,7 @@ app.controller('Inventory', function($rootScope, $scope, $mdDialog, $mdToast, $t
 					// display a success message to the user
 					$mdToast.show(
 						$mdToast.simple()
-							.textContent('Item with ID ' + item.item_id + ' removed successfully.')
+							.textContent('Item with ID ' + item.barcode + ' removed successfully.')
 							.position('bottom right')
 							.hideDelay(3000)
 					);
