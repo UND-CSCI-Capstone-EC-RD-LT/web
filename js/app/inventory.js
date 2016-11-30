@@ -135,15 +135,6 @@ app.controller('Inventory', function($rootScope, $scope, $mdDialog, $mdToast, $t
 				enableColumnResizing: true
 			},
 			{
-				name: 'item_location',
-				field: 'item_location',
-				displayName: 'Room',
-				enableCellEdit: true,
-				cellTemplate: './templates/grid/cell_template.html',
-				editableCellTemplate: '<form name="inputForm" class="md-grid-input-form"><md-input-container class="md-grid-input"><label>{{ col.displayName }}</label><input type="INPUT_TYPE" ui-grid-editor ng-model="MODEL_COL_FIELD" autocomplete="off"></md-input-container></form>',
-				enableColumnResizing: true
-			},
-			{
 				name: 'actions',
 				field: 'actions',
 				displayName: 'Actions',
