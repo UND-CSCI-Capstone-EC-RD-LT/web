@@ -75,12 +75,19 @@ app.factory('InventoryService', function($http, localStorageService) {
 
 		search: function(department, building, room) {
 
+			var query = '';
 
-
+			if (typeof department != 'undefined') {
+				query += department;
+				if (typeof building != 'undefined') {
+					query += '/'+ building;
+					if (typeof room != 'undefined') query += '/'+ room;
+				}
+			}
 
 			var req = {
           method: 'GET',
-          url: SERVER_URL+'items/search/'+department+'/'+building+'/'+room,
+          url: SERVER_URL+'items/search/'+query,
           headers: {
               'Content-Type': "application/json",
               'Authorization': "JWT " + localStorageService.get("token")
@@ -266,6 +273,7 @@ app.controller('Inventory', function($rootScope, $scope, $mdDialog, $mdToast, $t
 	};
 
 	$scope.search = function() {
+		$scope.gridOptions.data = new Array();
 		InventoryService.search(
 			$scope.department,
 			$scope.building,
