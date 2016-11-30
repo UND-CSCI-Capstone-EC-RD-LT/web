@@ -26,6 +26,71 @@ app.factory('InventoryService', function($http, localStorageService) {
 				return res.data.data;
 			})
 		},
+
+
+		getDepartments: function() {
+			var req = {
+          method: 'GET',
+          url: SERVER_URL+'departments',
+          headers: {
+              'Content-Type': "application/json",
+              'Authorization': "JWT " + localStorageService.get("token")
+          }
+      }
+
+			return $http(req).then(function(res) {
+				return res.data.data;
+			})
+		},
+
+		getBuildings: function() {
+			var req = {
+          method: 'GET',
+          url: SERVER_URL+'buildings',
+          headers: {
+              'Content-Type': "application/json",
+              'Authorization': "JWT " + localStorageService.get("token")
+          }
+      }
+
+			return $http(req).then(function(res) {
+				return res.data.data;
+			})
+		},
+
+		getRooms: function() {
+			var req = {
+          method: 'GET',
+          url: SERVER_URL+'rooms',
+          headers: {
+              'Content-Type': "application/json",
+              'Authorization': "JWT " + localStorageService.get("token")
+          }
+      }
+
+			return $http(req).then(function(res) {
+				return res.data.data;
+			})
+		},
+
+		search: function(department, building, room) {
+
+
+
+
+			var req = {
+          method: 'GET',
+          url: SERVER_URL+'items/search/'+department+'/'+building+'/'+room,
+          headers: {
+              'Content-Type': "application/json",
+              'Authorization': "JWT " + localStorageService.get("token")
+          }
+      }
+
+			return $http(req).then(function(res) {
+				return res.data.data;
+			})
+		},
 		
 		/**
 		 * filterInventory fetches items from the inventory database matching a specific filter and query
@@ -111,7 +176,7 @@ app.controller('Inventory', function($rootScope, $scope, $mdDialog, $mdToast, $t
 			$scope.gridApi = gridApi;
 		},
 		rowHeight: 50,
-		data: [{"item_id":"M127711","item_description":"Dell Monitor","item_building":"Streibel","item_location":115}],
+		data: new Array(),
 		columnDefs: [
 			{
 				name: 'barcode',
@@ -199,6 +264,16 @@ app.controller('Inventory', function($rootScope, $scope, $mdDialog, $mdToast, $t
 				$scope.gridOptions.data = res;
 			});
 	};
+
+	$scope.search = function() {
+		InventoryService.search(
+			$scope.department,
+			$scope.building,
+			$scope.room
+		).then(function(res) {
+			$scope.gridOptions.data = res;
+		});
+	};
 	
 	/**
 	 * The addItem function adds a new item to the grid.
@@ -252,8 +327,14 @@ app.controller('Inventory', function($rootScope, $scope, $mdDialog, $mdToast, $t
 				$scope.gridOptions.data = res;
 			})
 	};
+
+	$scope.load = function() {
+		InventoryService.getDepartments().then(function(res) { $scope.departments = res; });
+		InventoryService.getBuildings().then(function(res) { $scope.buildings = res; });
+		InventoryService.getRooms().then(function(res) { $scope.rooms = res; });
+	};
 	
 	// Populate our inventory data on load
-	$scope.getInventory();
+	$scope.load();
 	
 });
