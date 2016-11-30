@@ -205,8 +205,8 @@ app.controller('Inventory', function($rootScope, $scope, $mdDialog, $mdToast, $t
 				enableColumnResizing: true
 			},
 			{
-				name: 'itemType',
-				field: 'itemType',
+				name: 'typeName',
+				field: 'typeName',
 				displayName: 'Type',
 				enableCellEdit: true,
 				cellTemplate: './templates/grid/cell_template.html',
