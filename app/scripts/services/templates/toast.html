@@ -1,0 +1,9 @@
+<md-toast ng-class="toast.type">
+  <span class="md-toast-text" flex>{{toast.content}}</span>
+  <md-button ng-class="toast.type" ng-show="toast.details" ng-click="openDetails($event)">
+    See Details
+  </md-button>
+  <md-button ng-show="toast.close" ng-click="closeToast()">
+    Close
+  </md-button>
+</md-toast>

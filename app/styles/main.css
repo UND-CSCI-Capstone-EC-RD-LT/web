@@ -1,83 +1,235 @@
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
+        .browsehappy {
+          margin: 0.2em 0;
+          background: #ccc;
+          color: #000;
+          padding: 0.2em 0;
+        }
 
-body {
-  padding: 0;
-}
+        body {
+          padding: 0;
+          height: 100vh;
+        }
+        /* Everything but the jumbotron gets side spacing for mobile first views */
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
+        .header, .marketing, .footer {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+        /* Custom page header */
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
+        .header {
+          border-bottom: 1px solid #e5e5e5;
+          margin-bottom: 10px;
+        }
+        /* Make the masthead heading the same height as the navigation */
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
+        .header h3 {
+          margin-top: 0;
+          margin-bottom: 0;
+          line-height: 40px;
+          padding-bottom: 19px;
+        }
+        /* Custom page footer */
 
-.container-narrow > hr {
-  margin: 30px 0;
-}
+        .footer {
+          padding-top: 19px;
+          color: #777;
+          border-top: 1px solid #e5e5e5;
+        }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
+        .container-narrow>hr {
+          margin: 30px 0;
+        }
+        /* Main marketing message and sign up button */
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
+        .jumbotron {
+          text-align: center;
+          border-bottom: 1px solid #e5e5e5;
+        }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
+        .jumbotron .btn {
+          font-size: 21px;
+          padding: 14px 24px;
+        }
+        /* Supporting marketing content */
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
+        .marketing {
+          margin: 40px 0;
+        }
+
+        .marketing p+h4 {
+          margin-top: 28px;
+        }
+        /* Responsive: Portrait tablets and up */
+
+        @media screen and (min-width: 768px) {
+          .container {
+            max-width: 730px;
+          }
+          /* Remove the padding we set earlier */
+          .header, .marketing, .footer {
+            padding-left: 0;
+            padding-right: 0;
+          }
+          /* Space out the masthead */
+          .header {
+            margin-bottom: 30px;
+          }
+          /* Remove the bottom border on the jumbotron for visual effect */
+          .jumbotron {
+            border-bottom: 0;
+          }
+        }
+        /* Main Page */
+
+        #index {
+          height: 100vh;
+        }
+
+        md-progress-linear {
+          position: absolute;
+          z-index: 100;
+        }
+
+        md-progress-linear .md-container {
+          height: 2px;
+        }
+
+        #main {
+          height: 100vh;
+        }
+
+        md-sidenav {
+          width: 272px;
+          min-width: 272px;
+          max-width: 272px;
+        }
+
+        .sidenav-logo {
+          -mox-opacity: 0.5;
+          opacity: 0.5;
+          filter: alpha(opacity=50);
+          width: 150px;
+          margin-left: 60px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+        /* END Main Page */
+        /* Login Page */
+
+        .login {
+          margin: auto;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          position: absolute;
+        }
+
+        #login-logo {
+          width: 75px;
+          -mox-opacity: 0.5;
+          opacity: 0.5;
+          filter: alpha(opacity=50);
+        }
+
+        #login-area {
+          width: 450px;
+        }
+
+        #input-area {
+          border-right: 1px solid #EEEEEE;
+        }
+
+        #input-area .title {
+          font-size: 24px;
+          font-weight: 400;
+          color: #4caf50;
+        }
+
+        #input-area md-input-container label {
+          font-size: 13px;
+          font-weight: lighter;
+        }
+
+        #reset .title {
+          font-weight: 400;
+          color: #BDBDBD;
+          font-size: 15px;
+          margin-bottom: 4px;
+        }
+
+        #reset .link {
+          font-size: 12px;
+        }
+        /* End Login page*/
+        /* Toast */
+
+        md-toast {
+          position: fixed !important;
+          z-index: 1000001;
+        }
+
+        md-toast .md-button {
+          font-weight: bold;
+        }
+        /* Styling for default theme */
+
+        md-toast .info {
+          color: rgb(4, 118, 211) !important;
+          font-weight: bold;
+        }
+
+        md-toast .warning {
+          color: rgb(247, 155, 71) !important;
+          font-weight: bold;
+        }
+
+        md-toast .error {
+          color: rgb(243, 68, 57) !important;
+          font-weight: bold;
+        }
+
+        md-toast .success {
+          color: rgb(85, 204, 89) !important;
+          font-weight: bold;
+        }
+        /* Styling for flip theme */
+
+        md-toast .info-flip .md-toast-content {
+          color: rgb(4, 118, 211);
+        }
+
+        md-toast .warning-flip .md-toast-content {
+          color: rgb(247, 155, 71);
+        }
+
+        md-toast .error-flip .md-toast-content {
+          color: rgb(243, 68, 57);
+        }
+
+        md-toast .success-flip .md-toast-content {
+          color: rgb(85, 204, 89);
+        }
+        /* Styling for light theme */
+
+        md-toast info-light .md-toast-content {
+          background: rgb(4, 118, 211);
+          color: white;
+        }
+
+        md-toast .warning-light .md-toast-content {
+          background: rgb(247, 155, 71);
+          color: white;
+        }
+
+        md-toast .error-light .md-toast-content {
+          background: rgb(243, 68, 57);
+          color: white;
+        }
+
+        md-toast .success-light .md-toast-content {
+          background: rgb(85, 204, 89);
+          color: white;
+        }
+        /* END Toast*/

@@ -1,23 +1,26 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
+<md-progress-linear ng-show="loading" md-mode="indeterminate"></md-progress-linear>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div layout="column" id="main">
+    <div layout="row" flex>
+        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-sm')">
+            <md-toolbar>
+              <a ng-href="/" class="pointer">
+                <img class="sidenav-logo" src="images/und.png" />
+              </a>
+            </md-toolbar>
+            <md-content layout="column" flex>
+              <md-button ng-href="#/about">About</md-button>
+              <md-button ng-click="logout()">Logout</md-button>
+            </md-content>
+        </md-sidenav>
+        <div layout="column" flex>
+            <md-toolbar layout="row">
+                <div class="md-toolbar-tools">
+                    <md-icon class="fa fa-bars pointer" ng-click="toggleMenu()" hide-gt-sm></md-icon>
+                    <h1 flex>Welcome {{user.firstname}} {{user.lastname}}</h1>
+                </div>
+            </md-toolbar>
+            <md-content ui-view layout="column" flex layout-margin layout-padding></md-content>
+        </div>
+    </div>
 </div>
