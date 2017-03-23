@@ -33,7 +33,7 @@ angular
         controller: "MainCtrl"
       })
       .state('app.home', {
-        url: "", //This fills out the home page of the main view of the app with the content
+        url: "",
         templateUrl: "views/home.html",
         controller: 'HomeCtrl'
       })
@@ -45,22 +45,6 @@ angular
 
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
-    /*
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-      */
   }).run(function ($rootScope, $timeout) {
     /* Loading Bar at top*/
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -73,3 +57,5 @@ angular
     });
     /* END Loading Bar at top*/
   });
+
+var SERVER_URL = 'http://54.243.4.179/v1/';

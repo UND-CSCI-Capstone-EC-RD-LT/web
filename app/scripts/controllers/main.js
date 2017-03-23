@@ -11,7 +11,7 @@ angular.module('undimswebApp')
   .controller('MainCtrl', function ($scope, $state, $cookies, $timeout) {
     console.log('MainCtrl');
     // (!$cookies.get('user') || $cookies.get('user') == null || $cookies.get('token') == null) {
-    if (!$cookies.get('good')) {
+    if (!$cookies.get('token')) {
       $state.go('login');
     }
 
