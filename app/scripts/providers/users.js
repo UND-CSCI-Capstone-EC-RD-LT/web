@@ -130,8 +130,7 @@ factory('$User', function ($http, $q, $cookies) {
         headers: {
           'Content-Type': "application/json",
           'Authorization': "JWT " + $cookies.get('token')
-        },
-        data: data
+        }
       }).then(function (data) {
         return data.data;
       }, function (error) {

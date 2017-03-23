@@ -13,6 +13,7 @@ angular.module('undimswebApp').controller('LoginCtrl', function ($scope, $state,
       var token = res.data.token;
       var user = res.data.user;
       $cookies.put('token', token);
+      $cookies.put('user', JSON.stringify({ firstname: user.firstName, lastname: user.lastName }));
       $state.go('app.home');
     }, function (error) {
       Toast.error({

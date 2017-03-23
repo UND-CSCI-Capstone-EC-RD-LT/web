@@ -20,7 +20,7 @@ angular
     'ui.router',
     'ngMaterial'
   ])
-  .config(function ($stateProvider, $urlRouterProvider, $routeProvider, $locationProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $routeProvider, $locationProvider, $mdThemingProvider) {
     $stateProvider.state('login', {
         url: "/login",
         templateUrl: "views/login.html",
@@ -45,6 +45,7 @@ angular
 
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
+    $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('light-green');
   }).run(function ($rootScope, $timeout) {
     /* Loading Bar at top*/
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
