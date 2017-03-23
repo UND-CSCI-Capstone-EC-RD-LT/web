@@ -8,10 +8,15 @@
  * Controller of the undimswebApp
  */
 angular.module('undimswebApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, $state, $cookies, $timeout) {
+    console.log('MainCtrl');
+    // (!$cookies.get('user') || $cookies.get('user') == null || $cookies.get('token') == null) {
+    if (!$cookies.get('good')) {
+      $state.go('login');
+    }
+
+    $scope.logout = () => {
+      for (var key in $cookies.getAll()) { $cookies.remove(key); }
+      $state.go('login');
+    }
   });
