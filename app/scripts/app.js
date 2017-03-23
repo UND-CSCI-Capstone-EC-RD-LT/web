@@ -30,6 +30,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/add-user', {
+        templateUrl: 'views/adduser.html',
+        controller: 'AdduserCtrl',
+        controllerAs: 'addUser'
+      })
       .otherwise({
         redirectTo: '/'
       });
