@@ -8,15 +8,16 @@
  * Controller of the undimswebApp
  */
 angular.module('undimswebApp').controller('LoginCtrl', function ($scope, $state, $cookies, $User, Toast) {
-  $scope.login = (email, password) => {
+  $scope.login = function (email, password) {
     $User.signin(email, password).then(function (res) {
       var token = res.data.token;
       var user = res.data.user;
       $cookies.put('token', token);
       $state.go('app.home');
     }, function (error) {
-      //Toast.error({ content: Error.show(error) });
-      Toast.error({ content: error });
+      Toast.error({
+        content: { details: { error } }
+      });
     });
   }
 });

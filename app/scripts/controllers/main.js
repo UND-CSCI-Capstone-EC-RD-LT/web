@@ -9,13 +9,11 @@
  */
 angular.module('undimswebApp')
   .controller('MainCtrl', function ($scope, $state, $cookies, $timeout) {
-    console.log('MainCtrl');
-    // (!$cookies.get('user') || $cookies.get('user') == null || $cookies.get('token') == null) {
     if (!$cookies.get('token')) {
       $state.go('login');
     }
 
-    $scope.logout = () => {
+    $scope.logout = function () {
       for (var key in $cookies.getAll()) { $cookies.remove(key); }
       $state.go('login');
     }

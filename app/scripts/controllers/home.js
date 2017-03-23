@@ -9,5 +9,5 @@
  */
 angular.module('undimswebApp')
   .controller('HomeCtrl', function () {
-    console.log('HomeCtrl');
+    
   });
