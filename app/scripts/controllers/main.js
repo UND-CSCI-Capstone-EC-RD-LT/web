@@ -8,7 +8,7 @@
  * Controller of the undimswebApp
  */
 angular.module('undimswebApp')
-  .controller('MainCtrl', function ($scope, $state, $cookies, $mdSidenav) {
+  .controller('MainCtrl', function ($scope, $state, $cookies, $mdSidenav, $Item, Toast) {
     if (!$cookies.get('token')) {
       $state.go('login');
     }
@@ -23,4 +23,13 @@ angular.module('undimswebApp')
     $scope.toggleMenu = function () {
       $mdSidenav('left').toggle();
     }
+
+    $Item.search(1, 1, 1).then(function (res) {
+      console.log(res);
+    }, function (error) {
+      Toast.error({
+        content: { details: { error } }
+      });
+    });
+
   });
