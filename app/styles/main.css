@@ -80,6 +80,12 @@
             border-bottom: 0;
           }
         }
+        /* Loading Bar */
+
+        #loading-bar .bar {
+          background: rgb(46, 125, 50);
+        }
+        /* END Loading Bar*/
         /* Main Page */
 
         #index {
