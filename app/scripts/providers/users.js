@@ -8,7 +8,7 @@
  */
 angular.module('undimswebApp').factory('$User', function (APIHelper) {
   return {
-    signin: (data) => APIHelper.call('POST', 'auth/signin', data),
+    signin: (data) => APIHelper.call('POST', 'auth/signin'),
     signup: (data) => APIHelper.call('POST', 'auth/signup', data),
     get: (id) => APIHelper.call('GET', `users/${id}`),
     getAll: () => APIHelper.call('GET', 'users'),
