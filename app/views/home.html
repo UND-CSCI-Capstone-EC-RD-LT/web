@@ -1,23 +1,21 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+<table>
+  <tr style="border-bottom: 5px solid black; text-align: center;">
+    <td style="background-color:#f1f1f1">Barcode</td>
+    <td style="background-color:#f1f1f1">Room</td>
+    <td style="background-color:#f1f1f1">Type</td>
+    <td style="background-color:#f1f1f1">Created At</td>
+    <td style="background-color:#f1f1f1">Updated At</td>
+  </tr>
+<tr ng-repeat="item in items" style="border-bottom: 1px solid black;">
+  <td ng-if="$odd" style="border-left: 1px solid black; border-right: 1px solid black; background-color:#f1f1f1">{{ item.barcode }}</td>
+  <td ng-if="$even" style="border-left: 1px solid black; border-right: 1px solid black;">{{ item.barcode }}</td>
+  <td ng-if="$odd" style="border-right: 1px solid black; background-color:#f1f1f1">{{ item.room }}</td>
+  <td ng-if="$even" style="border-right: 1px solid black;">{{ item.room }}</td>
+  <td ng-if="$odd" style="border-right: 1px solid black; background-color:#f1f1f1">{{ item.typeName }}</td>
+  <td ng-if="$even" style="border-right: 1px solid black;">{{ item.typeName }}</td>
+  <td ng-if="$odd" style="border-right: 1px solid black; background-color:#f1f1f1">{{ item.createdAt }}</td>
+  <td ng-if="$even" style="border-right: 1px solid black;">{{ item.createdAt }}</td>
+  <td ng-if="$odd" style="border-right: 1px solid black; background-color:#f1f1f1">{{ item.updatedAt }}</td>
+  <td ng-if="$even" style="border-right: 1px solid black;">{{ item.updatedAt }}</td>
+</tr>
+</table>
