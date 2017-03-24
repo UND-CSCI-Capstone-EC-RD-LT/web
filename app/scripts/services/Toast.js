@@ -3,8 +3,7 @@
 /**
  * @ngdoc service
  * @name Toast
- * @description
- * Service to create a toast
+ * @description ervice to create a toast
  *
  *  Show function can do all setting
  *  Toast.show({
@@ -27,8 +26,7 @@
     Toast.info({ content: "Info Message" }); <- Without Dialog Button or for Dialog Button use -> Toast.info({ details: { content: "Info Message" } });
  *
  */
-angular.module('undimswebApp').
-service('Toast', function ($mdToast) {
+angular.module('undimswebApp').service('Toast', function ($mdToast) {
   const defaults = {
     theme: 'default', //default - follows Google | flip - default but ctext colors flipped | light - background color change
     type: 'success',
@@ -38,17 +36,16 @@ service('Toast', function ($mdToast) {
       title: 'Details',
       content: 'No Details'
     }
-  }
+  };
 
   return {
     setup: function (caller, data, type = 'success', content = 'Missing Content', title = 'Missing Title') {
-      if (typeof data == 'undefined') var data = {};
-      if (caller == 'success') delete data.details;
-      if (!data.hasOwnProperty('theme')) data.theme = defaults.theme;
-      if (data.theme == 'default') data.type = type;
-      else data.type = `${type}-${data.theme}`;
-      if (!data.hasOwnProperty('content')) data.content = content;
-      if (data.hasOwnProperty('details') && !data.details.hasOwnProperty('title')) data.details.title = title;
+      if (typeof data === 'undefined') { data = {}; }
+      if (caller === 'success') { delete data.details; }
+      if (!data.hasOwnProperty('theme')) { data.theme = defaults.theme; }
+      if (data.theme === 'default') { data.type = type; } else { data.type = `${type}-${data.theme}`; }
+      if (!data.hasOwnProperty('content')) { data.content = content; }
+      if (data.hasOwnProperty('details') && !data.details.hasOwnProperty('title')) { data.details.title = title; }
       return data;
     },
     success: function (data) {
@@ -64,7 +61,7 @@ service('Toast', function ($mdToast) {
       return this.show(this.setup('info', data, 'info', 'Info', 'Info Details'), false);
     },
     show: function (data, intital = true) {
-      if (intital) data = this.setup('show', data);
+      if (intital) { data = this.setup('show', data); }
       $mdToast.show({
         hideDelay: data.hasOwnProperty('hideDelay') ? data.hideDelay : defaults.hideDelay,
         position: data.hasOwnProperty('position') ? data.position : defaults.position,
@@ -77,7 +74,7 @@ service('Toast', function ($mdToast) {
           var isDlgOpen;
 
           $scope.closeToast = function () {
-            if (isDlgOpen) return;
+            if (isDlgOpen) { return; }
 
             $mdToast.hide().then(function () {
               isDlgOpen = false;
@@ -85,7 +82,7 @@ service('Toast', function ($mdToast) {
           };
 
           $scope.openDetails = function (e) {
-            if (isDlgOpen) return;
+            if (isDlgOpen) { return; }
             isDlgOpen = true;
 
             $mdDialog.show(

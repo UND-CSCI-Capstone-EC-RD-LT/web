@@ -11,8 +11,8 @@ angular.module('undimswebApp').factory('$Department', function (APIHelper) {
     create: (data) => APIHelper.call('POST', 'departments', data),
     get: (number) => APIHelper.call('GET', `departments/${number}`),
     getWithBuildings: (number) => APIHelper.call('GET', `departments/${number}/building`),
-    getAll: (number) => APIHelper.call('GET', 'departments'),
-    getAllWithBuildings: (number) => APIHelper.call('GET', `departments/building`),
+    getAll: () => APIHelper.call('GET', 'departments'),
+    getAllWithBuildings: () => APIHelper.call('GET', `departments/building`),
     update: (number, data) => APIHelper.call('PUT', `departments/${number}`, data),
     delete: (number) => APIHelper.call('DELETE', `departments/${number}`)
   };

@@ -429,7 +429,7 @@ module.exports = function (grunt) {
 
     babel: {
       options: {
-        sourceMap: true,
+        //sourceMap: true,
         presets: ['es2015']
       },
       dist: {
@@ -441,6 +441,10 @@ module.exports = function (grunt) {
         }]
       }
     }
+  });
+
+  grunt.registerTask('es6', 'Converting', function () {
+    grunt.task.run(['babel']);
   });
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {

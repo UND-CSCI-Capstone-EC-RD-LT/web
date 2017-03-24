@@ -8,14 +8,14 @@
  */
 angular.module('undimswebApp').service('APIHelper', function ($http, $q, $cookies) {
   return {
-    call: (method, url, data, headers) => {
+    call: (method, url, data) => {
       let req = {
         method: method,
-        url: SERVER_URL + url
+        url: SERVER_URL + url,
+        headers: { 'Content-Type': "application/json" }
       };
-      if (!headers) req.headers = { 'Content-Type': "application/json" };
-      if (!req.headers.Authorization) req.headers.Authorization = "JWT " + $cookies.get('token');
-      if (method == 'POST' || method == 'PUT' && data) req.data = data;
+      if ($cookies.get('token') && !req.headers.Authorization) { req.headers.Authorization = "JWT " + $cookies.get('token'); }
+      if (method === 'POST' || method === 'PUT' && data) { req.data = data; }
       return $http(req).then((data) => data.data, (error) => $q.reject(error));
     }
   };

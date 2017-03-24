@@ -10,7 +10,7 @@ angular.module('undimswebApp').factory('$Permission', function (APIHelper) {
   return {
     create: (data) => APIHelper.call('POST', 'permissions', data),
     get: (number) => APIHelper.call('GET', `permissions/${number}`),
-    getAll: (number) => APIHelper.call('GET', 'permissions'),
+    getAll: () => APIHelper.call('GET', 'permissions'),
     update: (number, data) => APIHelper.call('PUT', `permissions/${number}`, data),
     delete: (number) => APIHelper.call('DELETE', `permissions/${number}`)
   };

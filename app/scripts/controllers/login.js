@@ -8,23 +8,14 @@
  * Controller of the undimswebApp
  */
 angular.module('undimswebApp').controller('LoginCtrl', function ($scope, $state, $cookies, $User, Toast) {
-  $scope.login = function (email, password) {
-    $User.signin(email, password).then(function (res) {
-      var token = res.data.token;
-      var user = res.data.user;
-      var now = new Date();
-      var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-      $cookies.put('token', token, {
-        expires: tomorrow
-      });
-      $cookies.put('user', JSON.stringify({ firstname: user.firstName, lastname: user.lastName }), {
-        expires: tomorrow
-      });
+  $scope.login = (email, password) => {
+    $User.signin({ email, password }).then((res) => {
+      let { token, user } = res.data;
+      let now = new Date();
+      let expires = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      $cookies.put('token', token, { expires });
+      $cookies.put('user', JSON.stringify({ firstname: user.firstName, lastname: user.lastName }), { expires });
       $state.go('app.home');
-    }, function (error) {
-      Toast.error({
-        content: { details: { error } }
-      });
-    });
-  }
+    }, (error) => Toast.error({ details: { content: error.data.message } }));
+  };
 });
