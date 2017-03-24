@@ -18,11 +18,11 @@ angular.module('undimswebApp')
     $scope.logout = function () {
       for (var key in $cookies.getAll()) { $cookies.remove(key); }
       $state.go('login');
-    }
+    };
 
     $scope.toggleMenu = function () {
       $mdSidenav('left').toggle();
-    }
+    };
 
     $Item.search(1, 1, 1).then(function (res) {
       console.log(res);

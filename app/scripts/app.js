@@ -47,15 +47,9 @@ angular
     $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('light-green');
   }).run(function ($rootScope, $timeout) {
     /* Loading Bar at top*/
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-      return $rootScope.loading = true;
-    });
-    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams, options) {
-      return $timeout(function () {
-        return $rootScope.loading = false;
-      }, 1000);
-    });
+    $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => $rootScope.loading = true);
+    $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams, options) => $timeout(() => $rootScope.loading = false, 1000));
     /* END Loading Bar at top*/
   });
 
-var SERVER_URL = 'http://54.243.4.179/v1/';
+const SERVER_URL = 'http://54.243.4.179/v1/';

@@ -11,7 +11,7 @@ angular.module('undimswebApp').factory('$ItemType', function (APIHelper) {
     create: (data) => APIHelper.call('POST', 'itemtypes', data),
     get: (number) => APIHelper.call('GET', `itemtypes/${number}`),
     getWithItems: (number) => APIHelper.call('GET', `itemtypes/${number}/items`),
-    getAll: (number) => APIHelper.call('GET', 'itemtypes'),
+    getAll: () => APIHelper.call('GET', 'itemtypes'),
     update: (number, data) => APIHelper.call('PUT', `itemtypes/${number}`, data),
     delete: (number) => APIHelper.call('DELETE', `itemtypes/${number}`)
   };

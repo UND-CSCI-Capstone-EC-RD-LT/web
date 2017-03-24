@@ -17,5 +17,5 @@ angular.module('undimswebApp').controller('LoginCtrl', function ($scope, $state,
       $cookies.put('user', JSON.stringify({ firstname: user.firstName, lastname: user.lastName }), { expires });
       $state.go('app.home');
     }, (error) => Toast.error({ details: { content: error.data.message } }));
-  }
+  };
 });
