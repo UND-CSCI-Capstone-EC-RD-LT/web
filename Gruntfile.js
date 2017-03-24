@@ -425,6 +425,21 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    babel: {
+      options: {
+        sourceMap: true,
+        presets: ['es2015']
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'app/scripts',
+          src: ['**/*.js'],
+          dest: 'dist/scripts'
+        }]
+      }
     }
   });
 
@@ -434,6 +449,7 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
+      //'babel',
       'clean:server',
       'wiredep',
       'concurrent:server',
