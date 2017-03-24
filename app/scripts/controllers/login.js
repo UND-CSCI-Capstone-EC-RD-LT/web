@@ -12,9 +12,9 @@ angular.module('undimswebApp').controller('LoginCtrl', function ($scope, $state,
     $User.signin({ email, password }).then((res) => {
       let { token, user } = res.data;
       let now = new Date();
-      let expires = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      let expires = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
       $cookies.put('token', token, { expires });
-      $cookies.put('user', JSON.stringify({ firstname: user.firstName, lastname: user.lastName }), { expires });
+      $cookies.putObject('user', { firstname: user.firstName, lastname: user.lastName }, { expires });
       $state.go('app.home');
     }, (error) => Toast.error({ details: { content: error.data.message } }));
   };

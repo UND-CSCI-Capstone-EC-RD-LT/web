@@ -19,7 +19,7 @@ angular
     'ui.router',
     'ngMaterial'
   ])
-  .config(function ($stateProvider, $urlRouterProvider, $routeProvider, $locationProvider, $mdThemingProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $routeProvider, $locationProvider, $cookiesProvider, $mdThemingProvider) {
     $stateProvider.state('login', {
         url: "/login",
         templateUrl: "views/login.html",
@@ -45,9 +45,18 @@ angular
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
     $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('light-green');
-  }).run(function ($rootScope, $timeout) {
+  }).run(function ($rootScope, $timeout, $cookies, $state) {
     /* Loading Bar at top*/
-    $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => $rootScope.loading = true);
+    /* Login Check */
+    $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
+      if (toState.name.indexOf('app') > -1) {
+        if (!$cookies.get('token')) {
+          event.preventDefault();
+          $state.go('login');
+        }
+        $rootScope.loading = true;
+      }
+    });
     $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams, options) => $timeout(() => $rootScope.loading = false, 1000));
     /* END Loading Bar at top*/
   });
