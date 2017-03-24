@@ -9,6 +9,7 @@
 angular.module('undimswebApp').service('APIHelper', function ($http, $q, $cookies) {
   return {
     call: (method, url, data) => {
+      console.log(url);
       let req = {
         method: method,
         url: SERVER_URL + url,
