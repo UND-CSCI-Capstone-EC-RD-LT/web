@@ -45,7 +45,6 @@ angular
 
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
-    $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('light-green');
     cfpLoadingBarProvider.includeSpinner = false;
   }).run(function ($rootScope, $timeout, $cookies, $state) {
     /* Login Check */
