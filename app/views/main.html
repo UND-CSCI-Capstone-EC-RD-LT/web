@@ -1,24 +1,42 @@
-<div layout="column" id="main">
-    <div layout="row" flex>
-        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-            <md-toolbar>
-              <a ng-href="/" class="pointer">
-                <img class="sidenav-logo" src="images/und.png" />
-              </a>
-            </md-toolbar>
-            <md-content layout="column" flex>
-              <md-button ng-href="#/about">About</md-button>
-              <md-button ng-click="logout()">Logout</md-button>
-            </md-content>
-        </md-sidenav>
-        <div layout="column" flex>
-            <md-toolbar layout="row">
-                <div class="md-toolbar-tools">
-                    <md-icon class="fa fa-bars pointer" ng-click="toggleMenu()" hide-gt-sm></md-icon>
-                    <h1 flex>Welcome {{user.firstname}} {{user.lastname}}</h1>
-                </div>
-            </md-toolbar>
-            <md-content ui-view flex></md-content>
-        </div>
+<div layout="row">
+  <div id="left-nav-container">
+    <div id="left-nav">
+      <md-card id="left-nav-logo-container">
+        <md-card-content id="left-nav-logo">
+          <a ng-href="/" class="pointer">
+            <img class="sidenav-logo" src="images/und.png" />
+          </a>
+        </md-card-content>
+      </md-card>
+      <md-card>
+          <md-button ng-href="#/about">About</md-button>
+      </md-card>
     </div>
+  </div>
+  <div layout="column" flex>
+    <md-card id="header" layout="row" layout-align="end center">
+        <!-- <div flex flex-offset="5">Welcome {{user.firstname}} {{user.lastname}}</div> -->
+        <md-menu md-position-mode="target-right target" md-offset="0 45">
+          <md-button class="link" ng-click="openMenu($mdMenu, $event)">{{user.firstName}} {{user.lastName}}</md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button class="link" ng-click="profile()">Profile</md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button class="link" ng-click="logout()">Logout</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+    </md-card>
+    <md-card>
+      <md-card-content>
+          <div ui-view></div>
+        </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-content>
+        University of North Dakota - Inventory Management System - Senior Project 2016/2017
+      </md-card-content>
+    </md-card>
+  </div>
 </div>

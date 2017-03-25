@@ -37,6 +37,11 @@ angular
         templateUrl: "views/home.html",
         controller: 'HomeCtrl'
       })
+      .state('app.profile', {
+        url: "profile",
+        templateUrl: "views/profile.html",
+        controller: 'ProfileCtrl'
+      })
       .state('app.about', {
         url: 'about',
         templateUrl: "views/about.html",
@@ -45,7 +50,6 @@ angular
 
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
-    $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('light-green');
     cfpLoadingBarProvider.includeSpinner = false;
   }).run(function ($rootScope, $timeout, $cookies, $state) {
     /* Login Check */
