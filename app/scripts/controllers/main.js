@@ -8,16 +8,13 @@
  * Controller of the undimswebApp
  */
 angular.module('undimswebApp')
-  .controller('MainCtrl', function ($scope, $state, $cookies, $mdSidenav) {
+  .controller('MainCtrl', function ($scope, $state, $cookies) {
     $scope.user = $cookies.getObject('user');
 
-    $scope.logout = function () {
+    $scope.openMenu = ($mdMenu, ev) => $mdMenu.open(ev);
+    $scope.profile = () => $state.go('app.profile');
+    $scope.logout = () => {
       for (var key in $cookies.getAll()) { $cookies.remove(key); }
       $state.go('login');
     };
-
-    $scope.toggleMenu = function () {
-      $mdSidenav('left').toggle();
-    };
-
   });

@@ -37,6 +37,11 @@ angular
         templateUrl: "views/home.html",
         controller: 'HomeCtrl'
       })
+      .state('app.profile', {
+        url: "profile",
+        templateUrl: "views/profile.html",
+        controller: 'ProfileCtrl'
+      })
       .state('app.about', {
         url: 'about',
         templateUrl: "views/about.html",
