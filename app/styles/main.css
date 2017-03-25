@@ -125,10 +125,14 @@ md-progress-linear .md-container {
   position: absolute;
 }
 
+#login-header {
+  border-bottom: 1px solid #EEEEEE;
+}
+
 #login-logo {
-  width: 75px;
+  width: 150px;
   -mox-opacity: 0.5;
-  opacity: 0.5;
+  opacity: 0.2;
   filter: alpha(opacity=50);
 }
 

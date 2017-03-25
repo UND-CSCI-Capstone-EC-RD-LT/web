@@ -1,9 +1,9 @@
 <div class="login" layout="column" layout-align="center center">
-  <div>
-    <img id="login-logo" src="images/und.png" />
-  </div>
   <div id="login-area">
     <md-card>
+      <md-card-header id="login-header" layout="row" layout-align="center center">
+        <h3>Inventory Management System</h3>
+      </md-card-header>
       <md-card-content layout="row">
         <div id="input-area" flex="60">
           <form name="loginForm" layout="column" novalidate>
@@ -40,13 +40,18 @@
             </div>
   				</form>
   			</div>
-  			<div id="reset" flex layout="column" layout-align="start end">
-  				<h3 class="title">
-            Forgot your password?
-          </h3>
-  				<a class="link" href="#" ng-click="showForgotPasswordDialog($event)">
-            Reset your password here
-          </a>
+  			<div id="reset" flex layout="column"  layout-align="space-between center">
+          <div layout="column" layout-align="start end">
+            <h3 class="title">
+              Forgot your password?
+            </h3>
+    				<a class="link" href="#" ng-click="showForgotPasswordDialog($event)">
+              Reset your password here
+            </a>
+          </div>
+          <div>
+            <img id="login-logo" src="images/und.png" />
+          </div>
   			</div>
       </md-card-content>
     </md-card>
