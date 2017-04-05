@@ -46,6 +46,11 @@ angular
         url: 'about',
         templateUrl: "views/about.html",
         controller: "AboutCtrl"
+      })
+      .state('app.add-user', {
+        url: 'add-user',
+        templateUrl: "views/adduser.html",
+        controller: "AddUserCtrl"
       });
 
     $urlRouterProvider.otherwise('/');
