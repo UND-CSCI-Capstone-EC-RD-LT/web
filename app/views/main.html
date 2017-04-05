@@ -1,23 +1,42 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div layout="row">
+  <div id="left-nav-container">
+    <div id="left-nav">
+      <md-card id="left-nav-logo-container">
+        <md-card-content id="left-nav-logo">
+          <a ng-href="/" class="pointer">
+            <img class="sidenav-logo" src="images/und.png" />
+          </a>
+        </md-card-content>
+      </md-card>
+      <md-card>
+          <md-button ng-href="#/about">About</md-button>
+      </md-card>
+    </div>
+  </div>
+  <div layout="column" flex>
+    <md-card id="header" layout="row" layout-align="end center">
+        <!-- <div flex flex-offset="5">Welcome {{user.firstname}} {{user.lastname}}</div> -->
+        <md-menu md-position-mode="target-right target" md-offset="0 45">
+          <md-button class="link" ng-click="openMenu($mdMenu, $event)">{{user.firstName}} {{user.lastName}}</md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button class="link" ng-click="profile()">Profile</md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button class="link" ng-click="logout()">Logout</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+    </md-card>
+    <md-card>
+      <md-card-content>
+          <div ui-view></div>
+        </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-content>
+        University of North Dakota - Inventory Management System - Senior Project 2016/2017
+      </md-card-content>
+    </md-card>
+  </div>
 </div>
