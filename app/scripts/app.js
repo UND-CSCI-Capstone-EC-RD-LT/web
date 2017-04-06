@@ -46,8 +46,12 @@ angular
         url: 'about',
         templateUrl: "views/about.html",
         controller: "AboutCtrl"
+      })
+      .state('app.users', {
+        url: 'users',
+        templateUrl: 'views/users.html',
+        controller: 'UsersCtrl'
       });
-
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
     cfpLoadingBarProvider.includeSpinner = false;
