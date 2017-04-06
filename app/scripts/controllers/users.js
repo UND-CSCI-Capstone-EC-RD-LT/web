@@ -13,6 +13,8 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 
 	$scope.users = []
 
+	$scope.showDelete = false;
+
 	// Initializing Variables \\
 
 	// Getting Initial Data \\
@@ -24,34 +26,64 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 
 	// End Getting Initial Data \\
 
+	$scope.toggleDelete = () => {
+		for (var i = 0; i < $scope.users.length; i++) {
+			if($scope.users[i].selected) {
+				$scope.showDelete = true;
+				return;
+			}
+		}
+		$scope.showDelete = false;
+	}
+
 	$scope.showAddUser = function(ev) {
 	    $mdDialog.show({
 			controller: 'AddUserCtrl',
-			templateUrl: './views/adduser.tmpl.html',
+			templateUrl: './views/adduser.html',
 			parent: angular.element(document.body),
 			targetEvent: ev,
 			clickOutsideToClose:true,
 			fullscreen: false // Only for -xs, -sm breakpoints.
 	    })
 	    .then(function(answer) {
-	      	$scope.status = 'You said the information was "' + answer + '".';
+	      	// success toast/message for adding user
 	    }, function() {
 	      	$scope.status = 'You cancelled the dialog.';
 	    });
 	};
 
-	function DialogController($scope, $mdDialog) {
-	    $scope.hide = function() {
-	      $mdDialog.hide();
-	    };
+	$scope.showEditUser = function(user, ev) {
+	    $mdDialog.show({
+	    	locals: {editUser: user},
+			controller: 'EditUserCtrl',
+			templateUrl: './views/edituser.html',
+			parent: angular.element(document.body),
+			targetEvent: ev,
+			clickOutsideToClose:true,
+			fullscreen: false // Only for -xs, -sm breakpoints.
+	    })
+	    .then(function(answer) {
+	      	// success toast/message for editing user
+	    }, function() {
+	      	$scope.status = 'You cancelled the dialog.';
+	    });
+	};
 
-	    $scope.cancel = function() {
-	      $mdDialog.cancel();
-	    };
+	$scope.showConfirmDelete = function(ev) {
+	    // Appending dialog to document.body to cover sidenav in docs app
+	    var confirm = $mdDialog.confirm()
+	          .title('Delete Selected Users')
+	          .textContent('Are you sure you want to delete the selected users?')
+	          .ariaLabel('Delete Selected Users')
+	          .targetEvent(ev)
+	          .ok('Yes')
+	          .cancel('Cancel');
 
-	    $scope.answer = function(answer) {
-	      $mdDialog.hide(answer);
-	    };
-	}
+	    $mdDialog.show(confirm).then(function() {
+	    	// run delete code here
+	    }, function() {
+	     	// do nothing, user cancelled action
+	    });
+  	};
 
 });

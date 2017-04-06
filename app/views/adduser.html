@@ -1,0 +1,68 @@
+<md-content layout-padding class="add-user">
+	<h1 class="">Add User</h1>
+	<md-divider></md-divider>
+	<form name="addUserForm">
+
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Username</label>
+				<input type="text" ng-model="new.username" required>
+			</md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Password</label>
+				<input type="password" ng-model="new.password" required>
+			</md-input-container>
+
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Re-enter Password</label>
+				<input type="password" ng-model="new.password2" required>
+			</md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Email</label>
+				<input type="text" ng-model="new.email" required>
+			</md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>First Name</label>
+				<input type="text" ng-model="new.firstName" required>
+			</md-input-container>
+
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Last Name</label>
+				<input type="text" ng-model="new.lastName" required>
+			</md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+	        <md-input-container class="md-block" flex-gt-sm>
+	            <label>Department</label>
+	            <md-select ng-model="new.department" required>
+	            	<md-option ng-repeat="department in departments" value="{{department.id}}">
+	                	{{department.name}}
+	              	</md-option>
+	            </md-select>
+	        </md-input-container>
+	    </div>
+
+	    <div layout-gt-sm="row">
+	        <md-input-container class="md-block" flex-gt-sm>
+	            <label>Role</label>
+	            <md-select ng-model="new.role" required>
+	            	<md-option ng-repeat="role in roles" value="{{role.name}}">
+	                	{{role.name}}
+	              	</md-option>
+	            </md-select>
+	        </md-input-container>
+	    </div>
+
+	    <md-button type="submit" class="md-raised md-primary" ng-click="add()">Add User</md-button>
+	</form>
+</md-content>
