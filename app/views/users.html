@@ -1,0 +1,27 @@
+<div class="users">
+	<md-toolbar>
+	    <div class="md-toolbar-tools">
+	        <h1>Users</h1>
+	        <span flex></span>
+	        <md-button class="md-fab pull-right" aria-label="Add User" ng-click="showAddUser($event)">
+			    <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+			</md-button>
+	    </div>
+	</md-toolbar>
+	<md-list>
+		<md-divider></md-divider>
+	  	<md-list-item ng-repeat="user in users" ng-click="showEditUser(user, $event)" class="noright">
+	    	<p>{{ user.firstName }} {{ user.lastName }}</p>
+	    	<md-checkbox class="md-secondary" ng-model="user.selected" ng-click="toggleDelete()"></md-checkbox>
+	    	<md-divider></md-divider>
+	  	</md-list-item>
+	</md-list>
+	<md-toolbar>
+	    <div class="md-toolbar-tools">
+	        <span flex></span>
+	        <md-button ng-if="showDelete" class="md-fab pull-right" aria-label="Delete Users" ng-click="showConfirmDelete($event)">
+			    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+			</md-button>
+	    </div>
+	</md-toolbar>
+</div>

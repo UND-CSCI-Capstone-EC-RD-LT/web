@@ -30,6 +30,14 @@ h1, h2, h3 {
   color: var(--und-dark-gray) !important;
 }
 
+md-toolbar {
+  background-color: transparent !important;
+}
+
+.md-button.md-default-theme.md-primary, .md-button.md-primary {
+  color: white;
+}
+
 .md-primary {
   background-color: var(--und-dark-green) !important;
 }
@@ -248,3 +256,9 @@ md-toast .success-light .md-toast-content {
 
 
 /* END Toast*/
+
+/* Add User, Edit User */
+.add-user, .edit-user {
+  width: 700px;
+}
+/* End Add User, Edit User */
