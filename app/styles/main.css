@@ -34,6 +34,10 @@ md-toolbar {
   background-color: transparent !important;
 }
 
+md-toolbar.md-table-toolbar {
+  color: rgba(0, 0, 0, 0.87);
+}
+
 .md-button.md-default-theme.md-primary, .md-button.md-primary {
   color: white;
 }
