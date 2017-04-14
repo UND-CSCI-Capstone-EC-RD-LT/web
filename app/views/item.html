@@ -1,1 +1,32 @@
-<p>This is the item view.</p>
+<md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+        <span>Barcode: {{item.barcode}}</span>
+        <span flex></span>
+        <span>Created At: 10/10/2017</span>
+    </div>
+</md-toolbar>
+
+<md-table-container ng-show="scans.length">
+    <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+        <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="onReorder">
+            <tr md-row>
+                <th md-column md:order:by="date"><span>Date</span></th>
+                <th md-column md:order:by="building"><span>building</span></th>
+                <th md-column md:order:by="room"><span>Room</span></th>
+                <th md-column md:order:by="scanner"><span>Scanner</span></th>
+                <th md-column md:order:by="price"><span>Price</span></th>
+            </tr>
+        </thead>
+        <tbody md-body>
+            <tr md-row md-select="item" md-select-id="barcode" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect" ng-disabled="" data-ng-repeat="scan in scans | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                <td md-cell>{{ scan.date }}</td>
+                <td md-cell>{{ scan.building }}</td>
+                <td md-cell>{{ scan.room }}</td>
+                <td md-cell>{{ scan.scanner }}</td>
+                <td md-cell>{{ scan.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+</md-table-container>
+
+<!-- <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{items.count}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>
