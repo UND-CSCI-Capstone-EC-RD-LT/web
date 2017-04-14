@@ -1,21 +1,94 @@
-<table>
-  <tr style="border-bottom: 5px solid black; text-align: center;">
-    <td style="background-color:#f1f1f1">Barcode</td>
-    <td style="background-color:#f1f1f1">Room</td>
-    <td style="background-color:#f1f1f1">Type</td>
-    <td style="background-color:#f1f1f1">Created At</td>
-    <td style="background-color:#f1f1f1">Updated At</td>
-  </tr>
-  <tr ng-repeat="item in items" style="border-bottom: 1px solid black;">
-    <td ng-if="$odd" style="border-left: 1px solid black; border-right: 1px solid black; background-color:#f1f1f1">{{ item.barcode }}</td>
-    <td ng-if="$even" style="border-left: 1px solid black; border-right: 1px solid black;">{{ item.barcode }}</td>
-    <td ng-if="$odd" style="border-right: 1px solid black; background-color:#f1f1f1">{{ item.room }}</td>
-    <td ng-if="$even" style="border-right: 1px solid black;">{{ item.room }}</td>
-    <td ng-if="$odd" style="border-right: 1px solid black; background-color:#f1f1f1">{{ item.typeName }}</td>
-    <td ng-if="$even" style="border-right: 1px solid black;">{{ item.typeName }}</td>
-    <td ng-if="$odd" style="border-right: 1px solid black; background-color:#f1f1f1">{{ item.createdAt }}</td>
-    <td ng-if="$even" style="border-right: 1px solid black;">{{ item.createdAt }}</td>
-    <td ng-if="$odd" style="border-right: 1px solid black; background-color:#f1f1f1">{{ item.updatedAt }}</td>
-    <td ng-if="$even" style="border-right: 1px solid black;">{{ item.updatedAt }}</td>
-  </tr>
-</table>
+<md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools" ng-show="showSearch">
+        <span>Search</span>
+    </div>
+    <div class="md-toolbar-tools" ng-show="!showSearch">
+        <span>{{department.name}}&nbsp;</span>
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        <span>&nbsp;{{building.name}}&nbsp;</span>
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        <span>&nbsp;{{room.number}}</span>
+    </div>
+</md-toolbar>
+<div layout-padding ng-show="showSearch">
+    <form name="searchItemsForm">
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Department</label>
+                <md-select ng-model="criteria.department" ng-change="setDepartment()" required>
+                  <md-option ng-repeat="department in departments" value="{{department}}">
+                      {{department.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Building</label>
+                <md-select ng-model="criteria.building" ng-change="setBuilding()" ng-disabled="!criteria.department" required>
+                  <md-option ng-repeat="building in buildings" value="{{building}}">
+                      {{building.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>room</label>
+                <md-select ng-model="criteria.room" ng-change="setRoom()" ng-disabled="!criteria.building" required>
+                  <md-option ng-repeat="room in rooms" value="{{room}}">
+                      {{room.number}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <md-button class="md-raised md-primary" ng-click="search()" ng-disabled="!room">Search</md-button>
+    </form>
+</div>
+
+<md-toolbar class="md-table-toolbar md-default" ng-show="(!options.rowSelection || !selected.length) && items.length">
+    <div class="md-toolbar-tools">
+        <span>Items</span>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="loadStuff()">
+            <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="toggleSearch()">
+            <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-toolbar class="md-table-toolbar" ng-show="options.rowSelection && selected.length">
+    <div class="md-toolbar-tools">
+        <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="showConfirmDelete()">
+            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-table-container ng-show="items.length">
+    <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+        <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="onReorder">
+            <tr md-row>
+                <th md-column md:order:by="barcode"><span>Barcode</span></th>
+                <th md-column md:order:by="type"><span>Type</span></th>
+                <th md-column md:order:by="createdAt"><span>Created At</span></th>
+                <th md-column md:order:by="updatedAt"><span>Updated At</span></th>
+            </tr>
+        </thead>
+        <tbody md-body>
+            <tr md-row ui-sref="app.item({ id: item.id })" md-select="item" md-select-id="barcode" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect" ng-disabled="" data-ng-repeat="item in items | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                <td md-cell>{{ item.barcode }}</td>
+                <td md-cell>{{ item.typeName }}</td>
+                <td md-cell>{{ item.createdAt }}</td>
+                <td md-cell>{{ item.updatedAt }}</td>
+            </tr>
+        </tbody>
+    </table>
+</md-table-container>
+
+<!-- <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{items.count}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>

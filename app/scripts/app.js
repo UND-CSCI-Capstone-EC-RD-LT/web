@@ -18,7 +18,8 @@ angular
     'ngSanitize',
     'ui.router',
     'ngMaterial',
-    'angular-loading-bar'
+    'angular-loading-bar',
+    'md.data.table'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $routeProvider, $locationProvider, $cookiesProvider, cfpLoadingBarProvider, $mdThemingProvider) {
     $stateProvider.state('login', {
@@ -51,6 +52,11 @@ angular
         url: 'users',
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl'
+      })
+      .state('app.item', {
+        url: 'item/:id',
+        templateUrl: 'views/item.html',
+        controller: 'ItemCtrl'
       });
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
