@@ -76,8 +76,8 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 	          .textContent('Are you sure you want to delete the selected users?')
 	          .ariaLabel('Delete Selected Users')
 	          .targetEvent(ev)
-	          .ok('Yes')
-	          .cancel('Cancel');
+	          .cancel('Cancel')
+	          .ok('Delete');
 
 	    $mdDialog.show(confirm).then(function() {
 	    	// run delete code here

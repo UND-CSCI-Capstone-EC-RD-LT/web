@@ -1,8 +1,105 @@
 <md-toolbar class="md-table-toolbar md-default">
     <div class="md-toolbar-tools">
-        <span>Barcode: {{item.barcode}}</span>
+        <span>Item Details</span>
         <span flex></span>
-        <span>Created At: 10/10/2017</span>
+        <md-button class="md-icon-button" ng-click="toggleEdit()" ng-show="!showEdit" aria-label="edit">
+            <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+        </md-button>
+
+        <md-button class="md-icon-button" ng-click="cancel()" ng-if="showEdit" aria-label="cancel">
+            <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+        </md-button>
+
+        <md-button class="md-icon-button" ng-click="save()" ng-if="showEdit" ng-disabled="editForm.$invalid" aria-label="save">
+            <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<form name="editForm">
+	<div layout-padding layout="row" layout-xs="column">	
+		<div flex>
+		    <div layout-gt-sm="row">
+		        <md-input-container class="md-block" flex-gt-sm>
+		            <label>Barcode</label>
+		            <input type="text" ng-model="item.barcode" ng-disabled="!showEdit" required>
+		        </md-input-container>
+		    </div>
+		    <div layout-gt-sm="row">
+			    <md-input-container class="md-block" flex-gt-sm>
+			        <label>Type</label>
+			        <md-select ng-model="item.itemTypeId" ng-disabled="!showEdit">
+			          <md-option ng-repeat="type in types" value="{{ type.id }}">
+			              {{type.name}}
+			            </md-option>
+			        </md-select>
+			        <div class="md-errors-spacer"></div>
+			    </md-input-container>
+			</div>
+		    <div layout-gt-sm="row">
+		        <md-input-container class="md-block" flex-gt-sm>
+		            <label>Current Price</label>
+		            <input type="text" ng-model="item.currentPrice" ng-disabled="!showEdit" required>
+		        </md-input-container>
+		    </div>
+		    <div layout-gt-sm="row">
+		        <md-input-container class="md-block" flex-gt-sm>
+		            <label>Bought Price</label>
+		            <input type="text" ng-model="item.boughtPrice" ng-disabled="!showEdit" required>
+		        </md-input-container>
+		    </div>
+		  </div>
+		  <div flex>
+		    <div layout-gt-sm="row">
+		        <md-input-container class="md-block" flex-gt-sm>
+		            <label>Department</label>
+		            <md-select ng-model="item.departmentId" ng-change="setDepartment()" ng-disabled="!showEdit">
+		              <md-option ng-repeat="department in departments" value="{{ department.id }}">
+		                  {{department.name}}
+		                </md-option>
+		            </md-select>
+		           <div class="md-errors-spacer"></div>
+		        </md-input-container>
+		    </div>
+		    <div layout-gt-sm="row">
+		        <md-input-container class="md-block" flex-gt-sm>
+		            <label>Building</label>
+		            <md-select ng-model="item.buildingId" ng-change="setBuilding()" ng-disabled="!item.departmentId || !showEdit">
+		              <md-option ng-repeat="building in buildings" value="{{ building.id }}">
+		                  {{building.name}}
+		                </md-option>
+		            </md-select>
+		            <div class="md-errors-spacer"></div>
+		        </md-input-container>
+		    </div>
+		    <div layout-gt-sm="row">
+		        <md-input-container class="md-block" flex-gt-sm>
+		            <label>Room</label>
+		            <md-select ng-model="item.roomId" ng-change="setRoom()" ng-disabled="!item.buildingId || !showEdit">
+		              <md-option ng-repeat="room in rooms" value="{{ room.id }}">
+		                  {{room.number}}
+		                </md-option>
+		            </md-select>
+		            <div class="md-errors-spacer"></div>
+		        </md-input-container>
+		    </div>
+		    <div layout-gt-sm="row">
+		        <md-input-container class="md-block" flex-gt-sm>
+		            <label>Creator</label>
+		            <input type="text" ng-model="item.creatorName" ng-disabled="!showEdit" required>
+		        </md-input-container>
+		    </div>
+		</div>
+	</div>
+</form>
+
+<md-toolbar class="md-table-toolbar md-default" ng-show="(!options.rowSelection || !selected.length)">
+    <div class="md-toolbar-tools">
+        <span>Scan History</span>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="loadScanHistory()" aria-label="refresh">
+            <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
+        </md-button>
     </div>
 </md-toolbar>
 
