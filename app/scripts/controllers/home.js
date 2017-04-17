@@ -53,6 +53,8 @@ angular.module('undimswebApp').controller('HomeCtrl', function ($scope, $timeout
 
     $scope.setDepartment = () => {
         $scope.department = JSON.parse($scope.criteria.department);
+        $scope.buildings = [];
+        $scope.rooms = [];
         $Building.getAllByDepartment($scope.department.id).then((res) => {
             $scope.buildings = res.data.buildings;
         });
@@ -60,6 +62,7 @@ angular.module('undimswebApp').controller('HomeCtrl', function ($scope, $timeout
 
     $scope.setBuilding = () => {
         $scope.building = JSON.parse($scope.criteria.building);
+        $scope.rooms = [];
         $Room.getAllByBuilding($scope.building.id).then((res) => {
             $scope.rooms = res.data.rooms;
         });
@@ -106,7 +109,7 @@ angular.module('undimswebApp').controller('HomeCtrl', function ($scope, $timeout
 
     };
 
-    $scope.loadStuff = function () {
+    $scope.loadItems = function () {
         $scope.promise = $timeout(function () {
             $Item.search(1, 1, 1).then(function (res) {
                 for (var i = 0; i < res.data.length; i++) {

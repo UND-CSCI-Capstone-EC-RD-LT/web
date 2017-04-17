@@ -43,7 +43,7 @@
             </md-input-container>
         </div>
 
-        <md-button class="md-raised md-primary" ng-click="search()" ng-disabled="!room">Search</md-button>
+        <md-button class="md-raised md-primary" ng-click="search()" ng-disabled="!room" aria-label="search">Search</md-button>
     </form>
 </div>
 
@@ -51,10 +51,10 @@
     <div class="md-toolbar-tools">
         <span>Items</span>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="loadStuff()">
+        <md-button class="md-icon-button" ng-click="loadItems()" aria-label="refresh">
             <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
         </md-button>
-        <md-button class="md-icon-button" ng-click="toggleSearch()">
+        <md-button class="md-icon-button" ng-click="toggleSearch()" aria-label="show-search">
             <i class="fa fa-search fa-lg" aria-hidden="true"></i>
         </md-button>
     </div>
@@ -64,7 +64,7 @@
     <div class="md-toolbar-tools">
         <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="showConfirmDelete()">
+        <md-button class="md-icon-button" ng-click="showConfirmDelete()" aria-label="show-confirm-delete">
             <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
         </md-button>
     </div>
