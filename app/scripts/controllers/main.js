@@ -14,7 +14,7 @@ angular.module('undimswebApp')
     $scope.openMenu = ($mdMenu, ev) => $mdMenu.open(ev);
     $scope.profile = () => $state.go('app.profile');
     $scope.logout = () => {
-      for (var key in $cookies.getAll()) { $cookies.remove(key); }
+      for (let key in $cookies.getAll()) { $cookies.remove(key); }
       $state.go('login');
     };
   });

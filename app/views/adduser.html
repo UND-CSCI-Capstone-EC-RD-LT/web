@@ -1,68 +1,84 @@
 <md-content layout-padding class="add-user">
 	<h1 class="">Add User</h1>
 	<md-divider></md-divider>
-	<form name="addUserForm">
-
+	<form name="addUserForm" novalidate>
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>Username</label>
-				<input type="text" ng-model="new.username" required>
+				<input type="text" ng-model="new.username" name="username" required>
+				<div ng-messages="addUserForm.username.$error" role="alert">
+					<div ng-message="required">Required</div>
+				</div>
 			</md-input-container>
-        </div>
-
-        <div layout-gt-sm="row">
+    </div>
+  	<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>Password</label>
-				<input type="password" ng-model="new.password" required>
+				<input type="password" ng-model="new.password" name="password" required>
+				<div ng-messages="addUserForm.password.$error" role="alert">
+					<div ng-message="required">Required</div>
+				</div>
 			</md-input-container>
-
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>Re-enter Password</label>
-				<input type="password" ng-model="new.password2" required>
+				<input type="password" ng-model="new.password2" ng-pattern="new.password" name="password2" required>
+				<div ng-messages="addUserForm.password2.$error" role="alert">
+					<div ng-message="required">Required</div>
+					<div ng-message="pattern">Passwords do not match.</div>
+				</div>
 			</md-input-container>
-        </div>
-
-        <div layout-gt-sm="row">
+    </div>
+		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>Email</label>
-				<input type="text" ng-model="new.email" required>
+				<input type="text" ng-model="new.email" name="email" required>
+				<div ng-messages="addUserForm.email.$error" role="alert">
+					<div ng-message="required">Required</div>
+				</div>
 			</md-input-container>
-        </div>
-
-        <div layout-gt-sm="row">
+    </div>
+  	<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>First Name</label>
-				<input type="text" ng-model="new.firstName" required>
+				<input type="text" ng-model="new.firstName" name="firstname" required>
+				<div ng-messages="addUserForm.firstname.$error" role="alert">
+					<div ng-message="required">Required</div>
+				</div>
 			</md-input-container>
-
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>Last Name</label>
-				<input type="text" ng-model="new.lastName" required>
+				<input type="text" ng-model="new.lastName" name="lastname" required>
+				<div ng-messages="addUserForm.lastname.$error" role="alert">
+					<div ng-message="required">Required</div>
+				</div>
 			</md-input-container>
-        </div>
-
-        <div layout-gt-sm="row">
-	        <md-input-container class="md-block" flex-gt-sm>
-	            <label>Department</label>
-	            <md-select ng-model="new.department" required>
-	            	<md-option ng-repeat="department in departments" value="{{department.id}}">
-	                	{{department.name}}
-	              	</md-option>
-	            </md-select>
-	        </md-input-container>
-	    </div>
-
+    </div>
+  	<div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+          <label>Department</label>
+          <md-select ng-model="new.department" name="department" required>
+          	<md-option ng-repeat="department in departments" value="{{department.id}}">
+              	{{department.name}}
+            	</md-option>
+          </md-select>
+					<div ng-messages="addUserForm.department.$error" role="alert">
+						<div ng-message="required">Required</div>
+					</div>
+      </md-input-container>
+	   </div>
 	    <div layout-gt-sm="row">
-	        <md-input-container class="md-block" flex-gt-sm>
-	            <label>Role</label>
-	            <md-select ng-model="new.role" required>
-	            	<md-option ng-repeat="role in roles" value="{{role.name}}">
-	                	{{role.name}}
-	              	</md-option>
-	            </md-select>
-	        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Role</label>
+            <md-select ng-model="new.role" name="role" required>
+            	<md-option ng-repeat="role in roles" value="{{role.name}}">
+                	{{role.name}}
+              	</md-option>
+            </md-select>
+						<div ng-messages="addUserForm.role.$error" role="alert">
+							<div ng-message="required">Required</div>
+						</div>
+        </md-input-container>
 	    </div>
-
-	    <md-button type="submit" class="md-raised md-primary" ng-click="add()">Add User</md-button>
+	    <md-button type="submit" class="md-raised md-primary" ng-click="addUserForm.$valid && add()">Add User</md-button>
 	</form>
 </md-content>

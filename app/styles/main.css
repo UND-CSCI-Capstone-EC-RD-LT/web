@@ -22,6 +22,18 @@
   padding: 0.2em 0;
 }
 
+.md-fab {
+  background-color: var(--und-dark-green) !important;
+}
+
+md-checkbox.md-checked .md-icon {
+  background-color: var(--und-dark-green) !important;
+}
+
+md-checkbox.md-checked .md-ink-ripple {
+  color: var(--und-dark-green) !important;
+}
+
 body {
   background-color: var(--body-background-color);
 }
@@ -261,8 +273,12 @@ md-toast .success-light .md-toast-content {
 
 /* END Toast*/
 
+
 /* Add User, Edit User */
+
 .add-user, .edit-user {
   width: 700px;
 }
+
+
 /* End Add User, Edit User */
