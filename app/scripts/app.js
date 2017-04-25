@@ -19,7 +19,8 @@ angular
     'ui.router',
     'ngMaterial',
     'angular-loading-bar',
-    'md.data.table'
+    'md.data.table',
+    'chart.js',
   ])
   .config(function ($stateProvider, $urlRouterProvider, $routeProvider, $locationProvider, $cookiesProvider, cfpLoadingBarProvider, $mdThemingProvider) {
     $stateProvider.state('login', {
@@ -42,6 +43,11 @@ angular
         url: "profile",
         templateUrl: "views/profile.html",
         controller: 'ProfileCtrl'
+      })
+      .state('app.stats', {
+        url: "stats",
+        templateUrl: "views/stats.html",
+        controller: 'StatsCtrl'
       })
       .state('app.about', {
         url: 'about',
@@ -71,4 +77,5 @@ angular
     });
   });
 
-const SERVER_URL = 'http://54.243.4.179/v1/';
+//const SERVER_URL = 'http://54.243.4.179/v1/';
+const SERVER_URL = 'http://127.0.0.1:3000/v1/';
