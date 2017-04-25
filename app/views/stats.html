@@ -1,3 +1,25 @@
-<md-button ng-click="changeGraph(24)">Last 24 Hours</md-button>
-<md-button  ng-click="changeGraph(7)">Last Week</md-button>
-<canvas id="line" class="chart chart-line" chart-data="activity.data" chart-labels="activity.labels" chart-series="activity.series"></canvas>
+<md-button ng-click="changeData(24)">Last 24 Hours</md-button>
+<md-button  ng-click="changeData(7)">Last Week</md-button>
+<div layout="row">
+  <div flex="50">
+    <canvas id="line" class="chart chart-line" chart-data="activity.data" chart-labels="activity.labels" chart-series="activity.series"></canvas>
+  </div>
+  <div flex="25" flex-offset="15">
+    <canvas id="radar" class="chart chart-radar" chart-data="actions.data" chart-series="actions.series" chart-labels="actions.labels"></canvas>
+  </div>
+</div>
+<md-divider></md-divider>
+<div flex-layout="row">
+  <div flex="25">
+
+  </div>
+  <div flex="25">
+
+  </div>
+  <div flex="25">
+
+  </div>
+  <div flex="25">
+
+  </div>
+</div>
