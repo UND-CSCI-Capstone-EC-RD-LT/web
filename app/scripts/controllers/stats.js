@@ -71,6 +71,7 @@ angular.module('undimswebApp').controller('StatsCtrl', function($scope, $Logs) {
     for (let i in data) {
       for( let j in data[i]) {
           let action = j === 'find' || j === 'findOne' || j === 'findone' ? 'search' : j;
+          action = action === 'destroy' ? 'delete' : j;
           output[$scope.activity.series.indexOf(i)][$scope.actions.labels.indexOf(action)] += j.length;
       }
     }

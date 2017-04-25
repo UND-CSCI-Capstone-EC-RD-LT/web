@@ -2,9 +2,11 @@
 <md-button  ng-click="changeData(7)">Last Week</md-button>
 <div layout="row">
   <div flex="50">
+    <h1>Action Performed on Models</h1>
     <canvas id="line" class="chart chart-line" chart-data="activity.data" chart-labels="activity.labels" chart-series="activity.series"></canvas>
   </div>
   <div flex="25" flex-offset="15">
+    <h1>Action Types on Models</h1>
     <canvas id="radar" class="chart chart-radar" chart-data="actions.data" chart-series="actions.series" chart-labels="actions.labels"></canvas>
   </div>
 </div>
