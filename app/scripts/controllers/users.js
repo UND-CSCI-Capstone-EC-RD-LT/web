@@ -87,6 +87,7 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 				Promise.all(selected.map((item) => $User.delete(item.id))).then((res) => { //Wait for all Promises to finished then reload data and toast
 					load();
 					Toast.success();
+					$scope.showDelete = false;
 				});
 	    }, function() {
 	     	// do nothing, user cancelled action
