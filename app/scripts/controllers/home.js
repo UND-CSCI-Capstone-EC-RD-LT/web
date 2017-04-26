@@ -86,9 +86,7 @@ angular.module('undimswebApp').controller('HomeCtrl', function ($scope, $timeout
             }
             $scope.showSearch = false;
         }, function (error) {
-            Toast.error({
-                content: { details: { error } }
-            });
+          Toast.error({ details: { content: error.data.message } });
         });
     }
 
@@ -119,9 +117,7 @@ angular.module('undimswebApp').controller('HomeCtrl', function ($scope, $timeout
 
                 $scope.items = res.data;
             }, function (error) {
-                Toast.error({
-                    content: { details: { error } }
-                });
+                Toast.error({ details: { content: error.data.message } });
             });
         }, 2000);
     };

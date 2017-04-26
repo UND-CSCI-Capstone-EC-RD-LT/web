@@ -20,7 +20,6 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 	// Getting Initial Data \\
 	let load; //Initialize the load variable
 	(load = () => { // Set the load varibale to its function and run on init
-		console.log('load');
 		$User.getAll().then((res) => {
 			$scope.users = res.data.filter((user) => user.id != $scope.user.id); //Remove Self from user list
 		}, (error) => Toast.error({ details: { content: error.data.message } }));
