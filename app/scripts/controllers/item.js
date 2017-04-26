@@ -67,7 +67,7 @@ angular.module('undimswebApp').controller('ItemCtrl', function ($scope, $statePa
     	{date: "4/14/17 1:30 PM", building: "Streibel Hall", room: 109, scanner: "Eddie Carlson", price: "200.00"},
     	{date: "4/14/17 1:30 PM", building: "Streibel Hall", room: 109, scanner: "Eddie Carlson", price: "200.00"},
     	{date: "4/14/17 1:30 PM", building: "Streibel Hall", room: 109, scanner: "Eddie Carlson", price: "200.00"}
-    ];	
+    ];
 
     $scope.toggleEdit = () => {
     	$scope.showEdit = !$scope.showEdit;
@@ -95,7 +95,7 @@ angular.module('undimswebApp').controller('ItemCtrl', function ($scope, $statePa
 	        $scope.itemCopy = angular.copy($scope.item);
 
 	        Toast.success({
-	            content: { 
+	            content: {
 	            	details: {
 	            		success: 'Updated Item'
 	            	}

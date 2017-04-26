@@ -7,14 +7,11 @@
  * # LoginCtrl
  * Controller of the undimswebApp
  */
-angular.module('undimswebApp').controller('LoginCtrl', function ($scope, $state, $cookies, $User, Toast) {
+angular.module('undimswebApp').controller('LoginCtrl', function ($scope, $state, $cookies, $User, Toast, Auth) {
   $scope.login = (email, password) => {
     $User.signin({ email, password }).then((res) => {
       let { token, user } = res.data;
-      let now = new Date();
-      let expires = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
-      $cookies.put('token', token, { expires });
-      $cookies.putObject('user', user, { expires });
+      Auth.set(token, user);
       $state.go('app.home');
     }, (error) => Toast.error({ details: { content: error.data.message } }));
   };

@@ -67,12 +67,14 @@ angular
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
     cfpLoadingBarProvider.includeSpinner = false;
-  }).run(function ($rootScope, $timeout, $cookies, $state) {
+  }).run(function ($rootScope, $timeout, $cookies, $state, Auth) {
     /* Login Check */
     $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
-      if (toState.name.indexOf('app') > -1 && !$cookies.get('token')) {
+      if (toState.name.indexOf('app') > -1 && !Auth.get('token')) {
         event.preventDefault();
         $state.go('login');
+      } else {
+        Auth.refreah();
       }
     });
   });

@@ -7,8 +7,8 @@
  * # UsersCtrl
  * Controller of the undimswebApp
  */
-angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDialog, $User) {
-	
+angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDialog, $User, Toast) {
+
 	// Initializing Variables \\
 
 	$scope.users = []
@@ -18,11 +18,13 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 	// Initializing Variables \\
 
 	// Getting Initial Data \\
-
-	$User.getAll().then((res) => {
-		console.log(res.data);
-		$scope.users = res.data;
-	}, (error) => Toast.error({ details: { content: error.data.message } }));
+	let load; //Initialize the load variable
+	(load = () => { // Set the load varibale to its function and run on init
+		console.log('load');
+		$User.getAll().then((res) => {
+			$scope.users = res.data.filter((user) => user.id != $scope.user.id); //Remove Self from user list
+		}, (error) => Toast.error({ details: { content: error.data.message } }));
+	})();
 
 	// End Getting Initial Data \\
 
@@ -46,7 +48,8 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 			fullscreen: false // Only for -xs, -sm breakpoints.
 	    })
 	    .then(function(answer) {
-	      	// success toast/message for adding user
+				load();
+				Toast.success();
 	    }, function() {
 	      	$scope.status = 'You cancelled the dialog.';
 	    });
@@ -63,7 +66,8 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 			fullscreen: false // Only for -xs, -sm breakpoints.
 	    })
 	    .then(function(answer) {
-	      	// success toast/message for editing user
+				load();
+				Toast.success();
 	    }, function() {
 	      	$scope.status = 'You cancelled the dialog.';
 	    });
@@ -80,7 +84,11 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 	          .ok('Delete');
 
 	    $mdDialog.show(confirm).then(function() {
-	    	// run delete code here
+				let selected = $scope.users.filter((user) => user.selected); //Filter for only selected Users from list
+				Promise.all(selected.map((item) => $User.delete(item.id))).then((res) => { //Wait for all Promises to finished then reload data and toast
+					load();
+					Toast.success();
+				});
 	    }, function() {
 	     	// do nothing, user cancelled action
 	    });
