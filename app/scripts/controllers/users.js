@@ -20,7 +20,6 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 	// Getting Initial Data \\
 	let load; //Initialize the load variable
 	(load = () => { // Set the load varibale to its function and run on init
-		console.log('load');
 		$User.getAll().then((res) => {
 			$scope.users = res.data.filter((user) => user.id != $scope.user.id); //Remove Self from user list
 		}, (error) => Toast.error({ details: { content: error.data.message } }));
@@ -88,6 +87,7 @@ angular.module('undimswebApp').controller('UsersCtrl', function ($scope, $mdDial
 				Promise.all(selected.map((item) => $User.delete(item.id))).then((res) => { //Wait for all Promises to finished then reload data and toast
 					load();
 					Toast.success();
+					$scope.showDelete = false;
 				});
 	    }, function() {
 	     	// do nothing, user cancelled action

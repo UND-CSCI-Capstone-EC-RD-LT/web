@@ -71,26 +71,88 @@ angular.module('undimswebApp').controller('StatsCtrl', function($scope, $Logs) {
     for (let i in data) {
       for( let j in data[i]) {
           let action = j === 'find' || j === 'findOne' || j === 'findone' ? 'search' : j;
-          action = action === 'destroy' ? 'delete' : j;
-          output[$scope.activity.series.indexOf(i)][$scope.actions.labels.indexOf(action)] += j.length;
+          action = action === 'destroy' ? 'delete' : action;
+          action = action === 'building' || action === 'department' ? 'update' : action;
+          output[$scope.activity.series.indexOf(i)][$scope.actions.labels.indexOf(action)] += data[i][j].length;
       }
     }
 
     return output;
   };
 
+  const usersData = (data) => {
+    let output = {}
 
-  $Logs.getAll().then((res) => {
-    $scope.logs = {};
-    $scope.day = setupData(hoursBack(fixTimestamp(res.data), 24));
-    $scope.week = setupData(hoursBack(fixTimestamp(res.data), (24 *7)));
+    data.forEach((item) => {
+      let x = parseInt(item.timestamp.day());
+      let y = parseInt(item.timestamp.hour());
+      if(!output[x]) output[x] = [];
+      if(!output[x][y]) output[x][y] = 5; else output[x][y]++;
+    });
 
-    $scope.activity = line7($scope.week); //Last Week
-    $scope.actions = {};
-    $scope.actions.labels = ['create', 'delete', 'update', 'search'];
-    $scope.actions.series = $scope.activity.series;
-    $scope.actions.data = radarActions($scope.week);
-  });
+    let newData = [];
+    for (let i in output) {
+      for (let j in output[i]) {
+        newData.push({ y: 6-i, x: j, r: output[i][j] });
+      }
+    }
+    return newData;
+  };
+
+
+  let load;
+	(load = () => {
+    $Logs.getAll().then((res) => {
+      $scope.logs = {};
+      $scope.day = setupData(hoursBack(fixTimestamp(res.data), 24));
+      $scope.week = setupData(hoursBack(fixTimestamp(res.data), (24 *7)));
+
+      $scope.activity = line7($scope.week); //Last Week
+      $scope.actions = {};
+      $scope.actions.labels = ['create', 'delete', 'update', 'search'];
+      $scope.actions.series = $scope.activity.series;
+      $scope.actions.data = radarActions($scope.week);
+    });
+
+    $scope.users = {};
+    $Logs.get('user').then((res) => {
+      $scope.users.data = [usersData(fixTimestamp(res.data))];
+      $scope.users.series = ['Normal User'];
+      $scope.users.options = {
+        responsive: true,
+        title:{
+            display: true,
+            text:'User Frequency'
+        },
+        scales: {
+          yAxes: [{
+              ticks: {
+                min: 0,
+                max: 6,
+                stepSize: 1,
+                callback: (value, index, values) => {
+                  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                  return days[index]
+                }
+              }
+          }],
+          xAxes: [{
+            ticks: {
+              min: 0,
+              max: 23,
+              stepSize: 1,
+              callback: (value, index, values) => {
+                let hours = ['01:00 AM', '02:00 AM', '03:00 AM', '04:00 AM', '05:00 AM', '06:00 AM', '07:00 AM', '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM', '09:00 PM', '10:00 PM', '11:00 PM',  '12:00 AM'];
+                return hours[index];
+              }
+            }
+          }]
+        }
+      };
+    });
+	})();
+
+
 
   $scope.changeData = (type) => {
       $scope.activity = type === 7 ? line7($scope.week) : line24($scope.day);

@@ -8,13 +8,18 @@
  */
 angular.module('undimswebApp').service('Auth', function ($cookies) {
   return {
-    set : (token, user) => {
+    set: (token, user) => {
       let now = new Date();
       let expires = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
       $cookies.put('token', token, { expires });
       $cookies.putObject('user', user, { expires });
     },
-    get : (type) =>  $cookies.get(type),
+    updateUser: (user) => {
+      let now = new Date();
+      let expires = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
+      $cookies.putObject('user', user, { expires });
+    },
+    get: (type) =>  $cookies.get(type),
     refreah: () => {
       let now = new Date();
       let expires = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);

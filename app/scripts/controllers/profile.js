@@ -7,7 +7,4 @@
  * # ProfileCtrl
  * Controller of the undimswebApp
  */
-angular.module('undimswebApp')
-  .controller('ProfileCtrl', function () {
-    console.log('Profile Page');
-  });
+angular.module('undimswebApp').controller('ProfileCtrl', function () {});
