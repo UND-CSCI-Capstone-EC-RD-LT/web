@@ -19,7 +19,10 @@ angular.module('undimswebApp').service('Auth', function ($cookies) {
       let now = new Date();
       let expires = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 15);
       $cookies.put('token', $cookies.get('token'), { expires });
-      $cookies.putObject('user', $cookies.get('user'), { expires });
+      $cookies.putObject('user', $cookies.getObject('user'), { expires });
+    },
+    delete: () => {
+      for (let key in $cookies.getAll()) { $cookies.remove(key); }
     }
   };
 });
