@@ -7,7 +7,7 @@
  * # DepartmentsCtrl
  * Controller of the undimswebApp
  */
-angular.module('undimswebApp').controller('DepartmentsCtrl', function ($scope, $mdDialog, $Department, Toast) {
+angular.module('undimswebApp').controller('DepartmentsCtrl', function ($scope, $mdDialog, $mdEditDialog, $Department, Toast) {
   $scope.selected = [];
 
 	($scope.load = () => {
@@ -19,7 +19,7 @@ angular.module('undimswebApp').controller('DepartmentsCtrl', function ($scope, $
 		}, (error) => Toast.error({ details: { content: error.data.message } }));
 	})();
 
-  $scope.displayTime = timestamp => moment(timestamp).format('h:m a M/D/Y');
+  $scope.displayTime = timestamp => moment(timestamp).format(' M/D/Y h:m a');
 
   $scope.filter = (type) => {
     let ASC = type.slice(0, 1) === '-' ? false : true;
@@ -40,6 +40,22 @@ angular.module('undimswebApp').controller('DepartmentsCtrl', function ($scope, $
       return 0;
     });
   };
+
+  $scope.editName = function (event, department) {
+   let editDialog = {
+     modelValue: department.name,
+     save: input => {
+       if (input.$modelValue.length > 0) {
+         department.name = input.$modelValue;
+         $Department.update(department.id, { "name": department.name });
+       }
+     },
+     targetEvent: event,
+     title: 'Edit Department Name',
+   };
+
+   $mdEditDialog.small(editDialog);
+ };
 
   $scope.add = (ev) => {
     $mdDialog.show({

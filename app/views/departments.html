@@ -34,7 +34,8 @@
         </thead>
         <tbody md-body>
           <tr md-row md-select="department" md-on-select="selectDepartment" ng-repeat="department in departments">
-            <td md-cell>{{department.name}}</td>
+            <!--<td md-cell>{{department.name}}</td>-->
+            <td md-cell ng-click="editName($event, department)">{{department.name}}</td>
             <td md-cell>{{department.buildingCount}}</td>
             <td md-cell>{{displayTime(department.createdAt)}}</td>
             <td md-cell>{{displayTime(department.updatedAt)}}</td>
