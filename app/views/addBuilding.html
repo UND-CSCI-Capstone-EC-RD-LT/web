@@ -1,0 +1,24 @@
+<md-content layout-padding class="add-building">
+	<h1 class="">Add Building</h1>
+	<md-divider></md-divider>
+	<form name="addBuildingForm" novalidate>
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Name</label>
+				<input type="text" ng-model="new.name" name="name" required>
+				<div ng-messages="addBuildingForm.name.$error" role="alert">
+					<div ng-message="required">Required</div>
+				</div>
+			</md-input-container>
+      <md-input-container>
+          <md-select ng-model="new.department" required>
+            <md-option ng-value="department.id" ng-repeat="department in departments">{{department.name}}</md-option>
+          </md-select>
+          <div ng-messages="addBuildingForm.name.$error" role="alert">
+  					<div ng-message="required">Required</div>
+  				</div>
+      </md-input-container>
+    </div>
+	    <md-button type="submit" class="md-raised md-primary" ng-click="addBuildingForm.$valid && add()">Add Building</md-button>
+	</form>
+</md-content>
