@@ -1,0 +1,58 @@
+<div class="itemtype">
+    <md-toolbar class="md-table-toolbar md-default" ng-hide="showSearch || selected.length">
+      <div class="md-toolbar-tools">
+        <span>Item Type</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="load()">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+        </md-button>
+        <mb-button class="md-icon-button" ng-click="add($event)">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </mb-button>
+        <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-toolbar class="md-table-toolbar alternate" ng-show="!showSearch && selected.length">
+      <div class="md-toolbar-tools">
+        <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+        <div flex></div>
+        <mb-button class="md-icon-button" ng-click="delete()">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </mb-button>
+      </div>
+    </md-toolbar>
+
+    <md-toolbar class="md-table-toolbar alternate" ng-show="showSearch">
+      <div class="md-toolbar-tools">
+        <md-input-container flex>
+          <label>&nbsp;</label>
+          <input ng-model="searchValue" placeholder="Search">
+        </md-input-container>
+        <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-table-container>
+      <table md-table md-row-select="true" multiple="{{true}}" ng-model="selected">
+        <thead md-head md-on-reorder="sort">
+          <tr md-row>
+            <th md-column md-order-by="name"><span>Name</span></th>
+            <th md-column md-order-by="createdAt"><span>Create At</span></th>
+            <th md-column md-order-by="updatedAt"><span>Update At</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="itemType" ng-repeat="itemType in itemTypes | filter:searchValue">
+            <td md-cell ng-click="editName($event, itemType)">{{itemType.name}}</td>
+            <td md-cell>{{displayTime(itemType.createdAt)}}</td>
+            <td md-cell>{{displayTime(itemType.updatedAt)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
