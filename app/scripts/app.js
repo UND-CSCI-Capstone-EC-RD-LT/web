@@ -49,6 +49,11 @@ angular
         templateUrl: "views/stats.html",
         controller: 'StatsCtrl'
       })
+      .state('app.departments', {
+        url: "departments",
+        templateUrl: "views/departments.html",
+        controller: 'DepartmentsCtrl'
+      })
       .state('app.about', {
         url: 'about',
         templateUrl: "views/about.html",
@@ -79,5 +84,5 @@ angular
     });
   });
 
-//const SERVER_URL = 'http://54.243.4.179/v1/';
-const SERVER_URL = 'http://127.0.0.1:3000/v1/';
+const SERVER_URL = 'http://54.243.4.179/v1/';
+//const SERVER_URL = 'http://127.0.0.1:3000/v1/';
