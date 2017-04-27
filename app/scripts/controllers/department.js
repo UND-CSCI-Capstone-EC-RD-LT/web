@@ -9,6 +9,7 @@
  */
 angular.module('undimswebApp').controller('DepartmentsCtrl', function ($scope, $mdDialog, $mdEditDialog, $Department, Toast) {
   $scope.selected = [];
+  $scope.showSearch = false;
 
 	($scope.load = () => {
 		$Department.getAllWithBuildings().then((res) => {
@@ -16,12 +17,13 @@ angular.module('undimswebApp').controller('DepartmentsCtrl', function ($scope, $
         item.buildingCount = item.buildings.length;
         return item;
       });
+      $scope.departmentsBackup = $scope.departments;
 		}, (error) => Toast.error({ details: { content: error.data.message } }));
 	})();
 
   $scope.displayTime = timestamp => moment(timestamp).format(' M/D/Y h:m a');
 
-  $scope.filter = (type) => {
+  $scope.sort = (type) => {
     let ASC = type.slice(0, 1) === '-' ? false : true;
     let attr = ASC ? type : type.slice(1, type.length);
     $scope.departments.sort((a, b) => {
