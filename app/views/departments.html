@@ -1,0 +1,45 @@
+<div class="departments">
+    <md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length">
+      <div class="md-toolbar-tools">
+        <span>Department</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="load()">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+        </md-button>
+        <mb-button class="md-icon-button" ng-click="add($event)">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </mb-button>
+      </div>
+    </md-toolbar>
+
+    <md-toolbar class="md-table-toolbar alternate" ng-show="selected.length">
+      <div class="md-toolbar-tools">
+        <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+        <div flex></div>
+        <mb-button class="md-icon-button" ng-click="delete()">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </mb-button>
+      </div>
+    </md-toolbar>
+
+    <md-table-container>
+      <table md-table md-row-select="true" multiple="{{true}}" ng-model="selected">
+        <thead md-head md-on-reorder="filter">
+          <tr md-row>
+            <th md-column md-order-by="name"><span>Name</span></th>
+            <th md-column md-order-by="buildingCount"><span># of buildings</span></th>
+            <th md-column md-order-by="createdAt"><span>Create At</span></th>
+            <th md-column md-order-by="updatedAt"><span>Update At</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="department" md-on-select="selectDepartment" ng-repeat="department in departments">
+            <td md-cell>{{department.name}}</td>
+            <td md-cell>{{department.buildingCount}}</td>
+            <td md-cell>{{displayTime(department.createdAt)}}</td>
+            <td md-cell>{{displayTime(department.updatedAt)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
