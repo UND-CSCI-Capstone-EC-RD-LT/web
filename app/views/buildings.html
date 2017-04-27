@@ -1,7 +1,7 @@
-<div class="departments">
+<div class="buildings">
     <md-toolbar class="md-table-toolbar md-default" ng-hide="showSearch || selected.length">
       <div class="md-toolbar-tools">
-        <span>Department</span>
+        <span>Building</span>
         <div flex></div>
         <md-button class="md-icon-button" ng-click="load()">
           <i class="fa fa-refresh" aria-hidden="true"></i>
@@ -42,17 +42,23 @@
         <thead md-head md-on-reorder="sort">
           <tr md-row>
             <th md-column md-order-by="name"><span>Name</span></th>
-            <th md-column md-order-by="buildingCount"><span># of buildings</span></th>
+            <th md-column md-order-by="department"><span>Department</span></th>
+            <th md-column md-order-by="roomCount"><span># of rooms</span></th>
             <th md-column md-order-by="createdAt"><span>Create At</span></th>
             <th md-column md-order-by="updatedAt"><span>Update At</span></th>
           </tr>
         </thead>
         <tbody md-body>
-          <tr md-row md-select="department" ng-repeat="department in departments | filter:searchValue">
-            <td md-cell ng-click="editName($event, department)">{{department.name}}</td>
-            <td md-cell>{{department.buildingCount}}</td>
-            <td md-cell>{{displayTime(department.createdAt)}}</td>
-            <td md-cell>{{displayTime(department.updatedAt)}}</td>
+          <tr md-row md-select="building" ng-repeat="building in buildings | filter:searchValue">
+            <td md-cell ng-click="editName($event, building)">{{building.name}}</td>
+            <td md-cell>
+              <md-select ng-model="building.department" ng-change="editDepartment(building)">
+                <md-option ng-value="department.id" ng-repeat="department in departments">{{department.name}}</md-option>
+              </md-select>
+            </td>
+            <td md-cell>{{building.roomCount}}</td>
+            <td md-cell>{{displayTime(building.createdAt)}}</td>
+            <td md-cell>{{displayTime(building.updatedAt)}}</td>
           </tr>
         </tbody>
       </table>

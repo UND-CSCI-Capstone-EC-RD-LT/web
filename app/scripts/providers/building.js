@@ -10,7 +10,7 @@ angular.module('undimswebApp').factory('$Building', function (APIHelper) {
   return {
     create: (data) => APIHelper.call('POST', 'buildings', data),
     get: (number) => APIHelper.call('GET', `buildings/${number}`),
-    getWithRooms: (number) => APIHelper.call('GET', `buildings/${number}/room`),
+    getWithRooms: (number) => APIHelper.call('GET', `buildings/${number}/rooms`),
     getAll: () => APIHelper.call('GET', 'buildings'),
     getAllWithRooms: () => APIHelper.call('GET', `buildings/rooms`),
     getAllByDepartment: (number) => APIHelper.call('GET', `buildings/department/${number}`),

@@ -17,7 +17,6 @@ angular.module('undimswebApp').controller('DepartmentsCtrl', function ($scope, $
         item.buildingCount = item.buildings.length;
         return item;
       });
-      $scope.departmentsBackup = $scope.departments;
 		}, (error) => Toast.error({ details: { content: error.data.message } }));
 	})();
 
@@ -67,7 +66,7 @@ angular.module('undimswebApp').controller('DepartmentsCtrl', function ($scope, $
       targetEvent: ev,
       clickOutsideToClose:true,
       fullscreen: false // Only for -xs, -sm breakpoints.
-    }).then(function(answer) {
+    }).then(answer => {
       $scope.load();
       Toast.success();
     }, function() {
@@ -80,12 +79,12 @@ angular.module('undimswebApp').controller('DepartmentsCtrl', function ($scope, $
       Toast.success();
       $scope.selected = [];
     }, error => Toast.error({ details: { content: error.data.message } }));
+
 }).controller('AddDepartmentCtrl', function ($scope, $mdDialog, $Department, Toast, Auth) {
 
   $scope.new = {
     name: '',
   };
-
   $scope.hide = () => $mdDialog.hide();
 
   $scope.cancel = () => $mdDialog.cancel();
