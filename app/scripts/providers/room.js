@@ -13,7 +13,7 @@ angular.module('undimswebApp').factory('$Room', function (APIHelper) {
     getWithItems: (number) => APIHelper.call('GET', `rooms/${number}/item`),
     getWithItemsByType: (number, type) => APIHelper.call('GET', `rooms/${number}/item/${type}`),
     getAll: () => APIHelper.call('GET', 'rooms'),
-    getAllWithItems: () => APIHelper.call('GET', 'rooms/item'),
+    getAllWithItems: () => APIHelper.call('GET', 'rooms/items'),
     getAllByBuilding: (number) => APIHelper.call('GET', `rooms/building/${number}`),
     update: (number, data) => APIHelper.call('PUT', `rooms/${number}`, data),
     delete: (number) => APIHelper.call('DELETE', `rooms/${number}`)

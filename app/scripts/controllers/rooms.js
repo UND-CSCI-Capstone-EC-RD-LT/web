@@ -2,21 +2,21 @@
 
 /**
  * @ngdoc function
- * @name undimswebApp.controller:BuildingsCtrl
+ * @name undimswebApp.controller:RoomsCtrl
  * @description
- * # BuildingsCtrl
+ * # RoomsCtrl
  * Controller of the undimswebApp
  */
-angular.module('undimswebApp').controller('BuildingsCtrl', function ($scope, $mdDialog, $mdEditDialog, $Department, $Building, Toast) {
+angular.module('undimswebApp').controller('RoomsCtrl', function ($scope, $mdDialog, $mdEditDialog, $Building, $Room, Toast) {
   $scope.selected = [];
   $scope.showSearch = false;
 
 	($scope.load = () => {
-    $Department.getAll().then(res => {
-      $scope.departments = res.data;
-      $Building.getAllWithRooms().then(res => {
-  			$scope.buildings = res.data.map(item => {
-          item.roomCount = item.rooms.length;
+    $Building.getAll().then(res => {
+      $scope.buildings = res.data;
+      $Room.getAllWithItems().then(res => {
+  			$scope.rooms = res.data.map(item => {
+          item.itemCount = item.items.length;
           return item;
         });
   		}, (error) => Toast.error({ details: { content: error.data.message } }));
@@ -28,7 +28,7 @@ angular.module('undimswebApp').controller('BuildingsCtrl', function ($scope, $md
   $scope.sort = type => {
     let ASC = type.slice(0, 1) === '-' ? false : true;
     let attr = ASC ? type : type.slice(1, type.length);
-    $scope.buildings.sort((a, b) => {
+    $scope.rooms.sort((a, b) => {
       let A;
       let B;
       if (typeof a[attr] == 'number') {
@@ -45,19 +45,19 @@ angular.module('undimswebApp').controller('BuildingsCtrl', function ($scope, $md
     });
   };
 
-  $scope.editDepartment = building => $Building.update(building.id, { "department": building.department });
+  $scope.editBuilding = room => $Room.update(room.id, { "building": room.building });
 
-  $scope.editName = (event, building) => {
+  $scope.editNumber = (event, room) => {
    let editDialog = {
-     modelValue: building.name,
+     modelValue: room.number,
      save: input => {
        if (input.$modelValue.length > 0) {
-         building.name = input.$modelValue;
-         $Building.update(building.id, { "name": building.name });
+         room.number = input.$modelValue;
+         $Room.update(room.id, { "number": room.number });
        }
      },
      targetEvent: event,
-     title: 'Edit Building Name',
+     title: 'Edit Room Number',
    };
 
    $mdEditDialog.small(editDialog);
@@ -65,8 +65,8 @@ angular.module('undimswebApp').controller('BuildingsCtrl', function ($scope, $md
 
   $scope.add = ev => {
     $mdDialog.show({
-      controller: 'AddBuildingCtrl',
-      templateUrl: './views/addBuilding.html',
+      controller: 'AddRoomCtrl',
+      templateUrl: './views/addRoom.html',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose:true,
@@ -74,25 +74,23 @@ angular.module('undimswebApp').controller('BuildingsCtrl', function ($scope, $md
     }).then(answer => {
       $scope.load();
       Toast.success();
-    }, function() {
-        $scope.status = 'You cancelled the dialog.';
-    });
+    }, () => {});
   };
 
-  $scope.delete = () => Promise.all($scope.selected.map(item => $Building.delete(item.id))).then(res => {
+  $scope.delete = () => Promise.all($scope.selected.map(item => $Room.delete(item.id))).then(res => {
       $scope.load();
       Toast.success();
       $scope.selected = [];
     }, error => Toast.error({ details: { content: error.data.message } }));
 
-}).controller('AddBuildingCtrl', function ($scope, $mdDialog, $Department, $Building, Toast, Auth) {
+}).controller('AddRoomCtrl', function ($scope, $mdDialog, $Building, $Room, Toast, Auth) {
 
   $scope.new = {
     name: '',
-    department: '',
+    building: '',
   };
 
-  $Department.getAll().then(res => $scope.departments = res.data, error => Toast.error({ details: { content: error.data.message } }));
+  $Building.getAll().then(res => $scope.buildings = res.data, error => Toast.error({ details: { content: error.data.message } }));
 
   $scope.hide = () => $mdDialog.hide();
 
@@ -100,7 +98,7 @@ angular.module('undimswebApp').controller('BuildingsCtrl', function ($scope, $md
 
   $scope.add = () => {
       $scope.new.creator = Auth.getUser().id;
-      $Building.create($scope.new).then(res => $mdDialog.hide(true), error => Toast.error({ details: { content: error.data.message } }));
+      $Room.create($scope.new).then(res => $mdDialog.hide(true), error => Toast.error({ details: { content: error.data.message } }));
   };
 
 });
