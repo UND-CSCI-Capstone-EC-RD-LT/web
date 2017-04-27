@@ -94,13 +94,7 @@ angular.module('undimswebApp').controller('ItemCtrl', function ($scope, $statePa
     	$Item.update($scope.item.id, $scope.item).then(function (res) {
 	        $scope.itemCopy = angular.copy($scope.item);
 
-	        Toast.success({
-	            content: {
-	            	details: {
-	            		success: 'Updated Item'
-	            	}
-	            }
-	        });
+	        Toast.success();
 	    }, function (error) {
 	        Toast.error({
 	            content: { details: { error } }
