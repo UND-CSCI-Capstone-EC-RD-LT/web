@@ -59,6 +59,11 @@ angular
         templateUrl: "views/buildings.html",
         controller: 'BuildingsCtrl'
       })
+      .state('app.rooms', {
+        url: "rooms",
+        templateUrl: "views/rooms.html",
+        controller: 'RoomsCtrl'
+      })
       .state('app.about', {
         url: 'about',
         templateUrl: "views/about.html",
